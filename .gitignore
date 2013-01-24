@@ -1,17 +1,11 @@
-# Object files
-*.o
-
-# Libraries
-*.lib
-*.a
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
+# git ignore file
+*.suo
+*.csproj.user
+*.pdb
+bin*
+obj*
+Properties*
+_ReSharper*
+*.sln.DotSettings.user
+*.orig
+*.userprefs

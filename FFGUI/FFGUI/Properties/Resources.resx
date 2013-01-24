@@ -132,4 +132,7 @@
 	<data name="Form1_Form1_Missing_FFMPEG">
 		<value xml:space="preserve">Missing FFMPEG</value>
 	</data>
+	<data name="Form1_Form1_Without_FFMPEG_this_application_is_useless__closing_down">
+		<value xml:space="preserve">Without FFMPEG this application is useless, closing down</value>
+	</data>
 </root>

@@ -18,8 +18,8 @@ namespace FFGUI
 			{
 				Debug.WriteLine("No FFMpeg found, prompting user");
 				MessageBox.Show(this, Resources.Form1_Form1_This_application_uses_FFMPEG_for_it_s_conversion__Please_select_where_ffmpeg_exe_can_be_found, Resources.Form1_Form1_Missing_FFMPEG, MessageBoxButtons.OK, MessageBoxIcon.Error);
-				OpenFileDialog dialog = new OpenFileDialog();
-				DialogResult result = dialog.ShowDialog();
+				var dialog = new OpenFileDialog();
+				var result = dialog.ShowDialog();
 				if (result == DialogResult.OK)
 				{
 					ffmpeg = dialog.FileName;
@@ -27,7 +27,7 @@ namespace FFGUI
 				}
 				else
 				{
-					MessageBox.Show(this, "Without FFMPEG this application is useless, closing down", Resources.Form1_Form1_Missing_FFMPEG, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(this, Resources.Form1_Form1_Without_FFMPEG_this_application_is_useless__closing_down, Resources.Form1_Form1_Missing_FFMPEG, MessageBoxButtons.OK, MessageBoxIcon.Error);
 					Application.Exit();
 				}
 			}
@@ -49,22 +49,42 @@ namespace FFGUI
 			}
 
 			Debug.WriteLine(string.Format("Starting Conversion: \"{0}\" --> \"{1}\"", inputFileName.Text, outputFileName.Text));
-			string advancedOptions = "-s 1920x1080 -r 60 -b 1024k -ar 48000 -ab 320k -ac 2 -qscale 4";
-			string commandLine = String.Format("-i \"{0}\" {2} \"{1}\"", inputFileName.Text, outputFileName.Text, advancedOptions);
-			Debug.WriteLine(commandLine);
+			string advancedOptions = ParseAdvancedOptions();
+			string commandLineArguments = String.Format("Using arguments: -i \"{0}\" {2} \"{1}\"", inputFileName.Text, outputFileName.Text, advancedOptions);
+			Debug.WriteLine(commandLineArguments);
 
 			string ffmpeg = ConfigurationManager.AppSettings["FFMPEG_PATH"];
+			var p = Process.Start(ffmpeg, commandLineArguments);
+			//p.StandardOutput;
 
-			Process p = Process.Start(ffmpeg, commandLine);
+			/*
+			Process p = new Process
+			{
+				StartInfo =
+				{
+					FileName = ffmpeg,
+					Arguments = commandLine
+				}
+			};
+			/*
 			p.Exited += (o, args) =>
 				            {
 					            Debug.WriteLine("Conversion done");						
 				            };
+			//*/
+			/*
+			p.OutputDataReceived += (o, args) =>
+				                        {
+					                        Debug.WriteLine(args);
+				                        };
+			//*/
+			//p.Start();
+			//p.WaitForExit();
 		}
 
 		private void OnBrowseInputFile(object sender, EventArgs e)
 		{
-			DialogResult result = openFileDialog1.ShowDialog();
+			var result = openFileDialog1.ShowDialog();
 			if(result == DialogResult.OK)
 			{
 				inputFileName.Text = openFileDialog1.FileName;
@@ -73,11 +93,27 @@ namespace FFGUI
 
 		private void OnBrowseOutputFile(object sender, EventArgs e)
 		{
-			DialogResult result = saveFileDialog1.ShowDialog();
+			var result = saveFileDialog1.ShowDialog();
 			if(result == DialogResult.OK)
 			{
 				outputFileName.Text = saveFileDialog1.FileName;
 			}
+		}
+
+		internal string ParseAdvancedOptions()
+		{
+			var options = new EncodingOptions
+			{
+				VideoResolution = "1920x1080",
+				VideoFramerate = "60",
+				VideoBitrate = "1024k",
+				VideoScaleQuality = "4",
+				AudioSampleRate = "48000",
+				AudioBitrate = "320k",
+				AudioChannels = "2"
+			};
+
+			return options.ToString();
 		}
 	}
 }

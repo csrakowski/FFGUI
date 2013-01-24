@@ -80,6 +80,15 @@ namespace FFGUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Without FFMPEG this application is useless, closing down.
+        /// </summary>
+        internal static string Form1_Form1_Without_FFMPEG_this_application_is_useless__closing_down {
+            get {
+                return ResourceManager.GetString("Form1_Form1_Without_FFMPEG_this_application_is_useless__closing_down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid input file.
         /// </summary>
         internal static string Form1_onStartConversion_Invalid_input_file {

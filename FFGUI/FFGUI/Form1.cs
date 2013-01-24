@@ -33,7 +33,7 @@ namespace FFGUI
 			}
 			Debug.WriteLine(String.Format("Using ffmpeg at: \"{0}\"", ffmpeg));
 
-			SetEncodingOptions(EncodingOptions.CUSTOM720);			
+			SetEncodingOptions(EncodingOptions.Custom720);			
 		}
 
 		private void OnStartConversion(object sender, EventArgs e)
@@ -48,39 +48,9 @@ namespace FFGUI
 				MessageBox.Show(this, Resources.Form1_onStartConversion_No_output_file_selected, Resources.Form1_onStartConversion_Invalid_output_file, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
-
-			Debug.WriteLine(string.Format("Starting Conversion: \"{0}\" --> \"{1}\"", inputFileName.Text, outputFileName.Text));
 			EncodingOptions advancedOptions = GetEncodingOptions();
-			string commandLineArguments = String.Format("Using arguments: -i \"{0}\" {2} \"{1}\"", inputFileName.Text, outputFileName.Text, advancedOptions);
-			Debug.WriteLine(commandLineArguments);
 
-			string ffmpeg = ConfigurationManager.AppSettings["FFMPEG_PATH"];
-			var p = Process.Start(ffmpeg, commandLineArguments);
-			//p.StandardOutput;
-
-			/*
-			Process p = new Process
-			{
-				StartInfo =
-				{
-					FileName = ffmpeg,
-					Arguments = commandLine
-				}
-			};
-			/*
-			p.Exited += (o, args) =>
-				            {
-					            Debug.WriteLine("Conversion done");						
-				            };
-			//*/
-			/*
-			p.OutputDataReceived += (o, args) =>
-				                        {
-					                        Debug.WriteLine(args);
-				                        };
-			//*/
-			//p.Start();
-			//p.WaitForExit();
+			FFWrapper.StartConversion(inputFileName.Text, outputFileName.Text, advancedOptions);
 		}
 
 		private void OnBrowseInputFile(object sender, EventArgs e)

@@ -4,14 +4,17 @@ namespace FFGUI
 {
 	public sealed class EncodingOptions
 	{
-		public static readonly EncodingOptions CUSTOM720 = new EncodingOptions
+		public static readonly EncodingOptions Custom720 = new EncodingOptions
 		{
+			IncludeVideo = true,
 			VideoResolution = "1280x720",
-			VideoFramerate = "60",
+			VideoFramerate = "25",
 			VideoBitrate = "1024k",
 			VideoScaleQuality = "4",
+
+			IncludeAudio = true,
 			AudioSampleRate = "48000",
-			AudioBitrate = "320k",
+			AudioBitrate = "192k",
 			AudioChannels = "2"
 		};
 

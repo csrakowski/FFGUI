@@ -32,7 +32,8 @@ namespace FFGUI
 				}
 			}
 			Debug.WriteLine(String.Format("Using ffmpeg at: \"{0}\"", ffmpeg));
-			
+
+			SetEncodingOptions(EncodingOptions.CUSTOM720);			
 		}
 
 		private void OnStartConversion(object sender, EventArgs e)
@@ -49,7 +50,7 @@ namespace FFGUI
 			}
 
 			Debug.WriteLine(string.Format("Starting Conversion: \"{0}\" --> \"{1}\"", inputFileName.Text, outputFileName.Text));
-			string advancedOptions = ParseAdvancedOptions();
+			EncodingOptions advancedOptions = GetEncodingOptions();
 			string commandLineArguments = String.Format("Using arguments: -i \"{0}\" {2} \"{1}\"", inputFileName.Text, outputFileName.Text, advancedOptions);
 			Debug.WriteLine(commandLineArguments);
 
@@ -100,20 +101,37 @@ namespace FFGUI
 			}
 		}
 
-		internal string ParseAdvancedOptions()
+		private EncodingOptions GetEncodingOptions()
 		{
 			var options = new EncodingOptions
 			{
-				VideoResolution = "1920x1080",
-				VideoFramerate = "60",
-				VideoBitrate = "1024k",
-				VideoScaleQuality = "4",
-				AudioSampleRate = "48000",
-				AudioBitrate = "320k",
-				AudioChannels = "2"
+				IncludeVideo =includeVideo.Checked,
+				VideoResolution = videoResolution.Text,
+				VideoFramerate = videoFramerate.Text,
+				VideoBitrate = videoBitrate.Text,
+				VideoScaleQuality = videoScaleQuality.Text,
+
+				IncludeAudio = includeAudio.Checked,
+				AudioSampleRate = audioSamplerate.Text,
+				AudioBitrate = audioBitrate.Text,
+				AudioChannels = audioChannels.Text
 			};
 
-			return options.ToString();
+			return options;
+		}
+
+		private void SetEncodingOptions(EncodingOptions options)
+		{
+			includeVideo.Checked = options.IncludeVideo;
+			videoResolution.Text = options.VideoResolution;
+			videoFramerate.Text = options.VideoFramerate;
+			videoBitrate.Text = options.VideoBitrate;
+			videoScaleQuality.Text = options.VideoScaleQuality;
+
+			includeAudio.Checked = options.IncludeAudio;
+			audioSamplerate.Text = options.AudioSampleRate;
+			audioBitrate.Text = options.AudioBitrate;
+			audioChannels.Text = options.AudioChannels;
 		}
 	}
 }

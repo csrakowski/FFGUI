@@ -15,11 +15,13 @@ namespace FFGUI
 			AudioChannels = "2"
 		};
 
+		public bool IncludeVideo { get; set; }
+
 		public string VideoResolution { get; set; }
 		private string VideoResolutionArgument {
 			get
 			{
-				if(String.IsNullOrEmpty(VideoResolution))
+				if (IncludeVideo == false || String.IsNullOrEmpty(VideoResolution))
 				{
 					return String.Empty;
 				}
@@ -35,7 +37,7 @@ namespace FFGUI
 		{
 			get
 			{
-				if (String.IsNullOrEmpty(VideoFramerate))
+				if (IncludeVideo == false || String.IsNullOrEmpty(VideoFramerate))
 				{
 					return String.Empty;
 				}
@@ -51,7 +53,7 @@ namespace FFGUI
 		{
 			get
 			{
-				if (String.IsNullOrEmpty(VideoBitrate))
+				if (IncludeVideo == false || String.IsNullOrEmpty(VideoBitrate))
 				{
 					return String.Empty;
 				}
@@ -67,7 +69,7 @@ namespace FFGUI
 		{
 			get
 			{
-				if (String.IsNullOrEmpty(VideoScaleQuality))
+				if (IncludeVideo == false || String.IsNullOrEmpty(VideoScaleQuality))
 				{
 					return String.Empty;
 				}
@@ -78,13 +80,15 @@ namespace FFGUI
 			}
 		}
 
-		
+
+		public bool IncludeAudio { get; set; }
+
 		public string AudioSampleRate { get; set; }
 		private string AudioSampleRateArgument
 		{
 			get
 			{
-				if (String.IsNullOrEmpty(AudioSampleRate))
+				if (IncludeAudio == false || String.IsNullOrEmpty(AudioSampleRate))
 				{
 					return String.Empty;
 				}
@@ -100,7 +104,7 @@ namespace FFGUI
 		{
 			get
 			{
-				if (String.IsNullOrEmpty(AudioBitrate))
+				if (IncludeAudio == false || String.IsNullOrEmpty(AudioBitrate))
 				{
 					return String.Empty;
 				}
@@ -116,7 +120,7 @@ namespace FFGUI
 		{
 			get
 			{
-				if (String.IsNullOrEmpty(AudioChannels))
+				if (IncludeAudio == false || String.IsNullOrEmpty(AudioChannels))
 				{
 					return String.Empty;
 				}

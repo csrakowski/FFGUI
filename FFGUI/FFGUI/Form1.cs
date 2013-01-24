@@ -24,6 +24,7 @@ namespace FFGUI
 				{
 					ffmpeg = dialog.FileName;
 					ConfigurationManager.AppSettings["FFMPEG_PATH"] = ffmpeg;
+					MessageBox.Show(this, String.Format("To make this change permanent please write the following text in the .config file at the \"FFMPEG_PATH\" key:\n{0}", ffmpeg));
 				}
 				else
 				{
@@ -33,7 +34,7 @@ namespace FFGUI
 			}
 			Debug.WriteLine(String.Format("Using ffmpeg at: \"{0}\"", ffmpeg));
 
-			SetEncodingOptions(EncodingOptions.Custom720);			
+			SetEncodingOptions(EncodingOptions.Custom720);
 		}
 
 		private void OnStartConversion(object sender, EventArgs e)

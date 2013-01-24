@@ -126,4 +126,10 @@
 	<data name="Form1_onStartConversion_No_input_file_selected">
 		<value xml:space="preserve">No input file selected</value>
 	</data>
+	<data name="Form1_Form1_This_application_uses_FFMPEG_for_it_s_conversion__Please_select_where_ffmpeg_exe_can_be_found">
+		<value xml:space="preserve">This application uses FFMPEG for it's conversion. Please select where ffmpeg.exe can be found</value>
+	</data>
+	<data name="Form1_Form1_Missing_FFMPEG">
+		<value xml:space="preserve">Missing FFMPEG</value>
+	</data>
 </root>

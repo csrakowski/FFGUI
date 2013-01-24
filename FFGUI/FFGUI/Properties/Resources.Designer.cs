@@ -61,6 +61,25 @@ namespace FFGUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Missing FFMPEG.
+        /// </summary>
+        internal static string Form1_Form1_Missing_FFMPEG {
+            get {
+                return ResourceManager.GetString("Form1_Form1_Missing_FFMPEG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This application uses FFMPEG for it&apos;s conversion. Please select where ffmpeg.exe can be found.
+        /// </summary>
+        internal static string Form1_Form1_This_application_uses_FFMPEG_for_it_s_conversion__Please_select_where_ffmpeg_exe_can_be_found {
+            get {
+                return ResourceManager.GetString("Form1_Form1_This_application_uses_FFMPEG_for_it_s_conversion__Please_select_where" +
+                        "_ffmpeg_exe_can_be_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid input file.
         /// </summary>
         internal static string Form1_onStartConversion_Invalid_input_file {

@@ -4,12 +4,30 @@ namespace FFGUI
 {
 	public sealed class EncodingOptions
 	{
+        public static readonly EncodingOptions Custom480 = new EncodingOptions
+        {
+            PresetName = "480p",
+
+            IncludeVideo = true,
+            VideoResolution = "853x480",
+            VideoFramerate = "25",
+            VideoBitrate = "1024k",
+            VideoScaleQuality = "4",
+
+            IncludeAudio = true,
+            AudioSampleRate = "48000",
+            AudioBitrate = "192k",
+            AudioChannels = "2"
+        };
+
 		public static readonly EncodingOptions Custom720 = new EncodingOptions
 		{
+            PresetName = "720p",
+
 			IncludeVideo = true,
 			VideoResolution = "1280x720",
 			VideoFramerate = "25",
-			VideoBitrate = "1024k",
+			VideoBitrate = "2048k",
 			VideoScaleQuality = "4",
 
 			IncludeAudio = true,
@@ -17,6 +35,26 @@ namespace FFGUI
 			AudioBitrate = "192k",
 			AudioChannels = "2"
 		};
+        
+        public static readonly EncodingOptions Custom1080 = new EncodingOptions
+        {
+            PresetName = "1080p",
+
+            IncludeVideo = true,
+            VideoResolution = "1920x1080",
+            VideoFramerate = "25",
+            VideoBitrate = "8192k",
+            VideoScaleQuality = "4",
+
+            IncludeAudio = true,
+            AudioSampleRate = "48000",
+            AudioBitrate = "320k",
+            AudioChannels = "2"
+        };
+
+        public static readonly EncodingOptions[] Presets = new [] { Custom480, Custom720, Custom1080 };
+
+	    public string PresetName { get; set; }
 
 		public bool IncludeVideo { get; set; }
 

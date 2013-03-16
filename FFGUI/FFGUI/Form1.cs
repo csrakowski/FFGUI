@@ -1,9 +1,9 @@
-﻿using System;
+﻿using FFGUI.Properties;
+using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using FFGUI.Properties;
 
 namespace FFGUI
 {
@@ -34,7 +34,15 @@ namespace FFGUI
 			}
 			Debug.WriteLine(String.Format("Using ffmpeg at: \"{0}\"", ffmpeg));
 
-			SetEncodingOptions(EncodingOptions.Custom720);
+            saveFileDialog1.Filter = Resources.FileFormats;
+            saveFileDialog1.DefaultExt = "mp4";
+
+		    foreach (var preset in EncodingOptions.Presets)
+		    {
+		        presets.Items.Add(preset.PresetName);
+		    }
+		    presets.SelectedIndex = 1;
+		    //SetEncodingOptions(EncodingOptions.Custom720);
 		}
 
 		private void OnStartConversion(object sender, EventArgs e)
@@ -49,14 +57,13 @@ namespace FFGUI
 				MessageBox.Show(this, Resources.Form1_onStartConversion_No_output_file_selected, Resources.Form1_onStartConversion_Invalid_output_file, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
-			EncodingOptions advancedOptions = GetEncodingOptions();
-
+			var advancedOptions = GetEncodingOptions();
 			FFWrapper.StartConversion(inputFileName.Text, outputFileName.Text, advancedOptions);
 		}
 
 		private void OnBrowseInputFile(object sender, EventArgs e)
 		{
-			var result = openFileDialog1.ShowDialog();
+		    var result = openFileDialog1.ShowDialog(this);
 			if(result == DialogResult.OK)
 			{
 				inputFileName.Text = openFileDialog1.FileName;
@@ -64,8 +71,8 @@ namespace FFGUI
 		}
 
 		private void OnBrowseOutputFile(object sender, EventArgs e)
-		{
-			var result = saveFileDialog1.ShowDialog();
+		{            
+            var result = saveFileDialog1.ShowDialog(this);
 			if(result == DialogResult.OK)
 			{
 				outputFileName.Text = saveFileDialog1.FileName;
@@ -74,10 +81,20 @@ namespace FFGUI
 
 		private EncodingOptions GetEncodingOptions()
 		{
+		    var res = "";
+		    var p = videoResolution.Text.Split('x');
+            if (p.Length > 1)
+            {
+                uint a, b;
+                if (UInt32.TryParse(p[0], out a) && UInt32.TryParse(p[1], out b))
+                {
+                    res = a + "x" + b;
+                }
+            }
 			var options = new EncodingOptions
 			{
 				IncludeVideo =includeVideo.Checked,
-				VideoResolution = videoResolution.Text,
+				VideoResolution = res,
 				VideoFramerate = videoFramerate.Text,
 				VideoBitrate = videoBitrate.Text,
 				VideoScaleQuality = videoScaleQuality.Text,
@@ -104,5 +121,10 @@ namespace FFGUI
 			audioBitrate.Text = options.AudioBitrate;
 			audioChannels.Text = options.AudioChannels;
 		}
+
+        private void OnSelectPreset(object sender, EventArgs e)
+        {
+            SetEncodingOptions(EncodingOptions.Presets[presets.SelectedIndex]);
+        }
 	}
 }

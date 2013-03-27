@@ -2,8 +2,25 @@
 
 namespace FFGUI
 {
-	public sealed class EncodingOptions
-	{
+    public sealed class EncodingOptions
+    {
+        public static readonly EncodingOptions HFVideo = new EncodingOptions
+        {
+            PresetName = "hfVideo",
+
+            IncludeVideo = true,
+            VideoResolution = "1280x720",
+            VideoFramerate = "25",
+            VideoBitrate = "2048k",
+            VideoScaleQuality = "4",
+            ForcedVideoCodec = "x264",
+
+            IncludeAudio = true,
+            AudioSampleRate = "44100",
+            AudioBitrate = "192k",
+            AudioChannels = "2"
+        };
+
         public static readonly EncodingOptions Custom480 = new EncodingOptions
         {
             PresetName = "480p",
@@ -13,6 +30,7 @@ namespace FFGUI
             VideoFramerate = "25",
             VideoBitrate = "1024k",
             VideoScaleQuality = "4",
+            ForcedVideoCodec = "x264",
 
             IncludeAudio = true,
             AudioSampleRate = "48000",
@@ -20,22 +38,23 @@ namespace FFGUI
             AudioChannels = "2"
         };
 
-		public static readonly EncodingOptions Custom720 = new EncodingOptions
-		{
+        public static readonly EncodingOptions Custom720 = new EncodingOptions
+        {
             PresetName = "720p",
 
-			IncludeVideo = true,
-			VideoResolution = "1280x720",
-			VideoFramerate = "25",
-			VideoBitrate = "2048k",
-			VideoScaleQuality = "4",
+            IncludeVideo = true,
+            VideoResolution = "1280x720",
+            VideoFramerate = "25",
+            VideoBitrate = "2048k",
+            VideoScaleQuality = "4",
+            ForcedVideoCodec = "x264",
 
-			IncludeAudio = true,
-			AudioSampleRate = "48000",
-			AudioBitrate = "192k",
-			AudioChannels = "2"
-		};
-        
+            IncludeAudio = true,
+            AudioSampleRate = "48000",
+            AudioBitrate = "192k",
+            AudioChannels = "2"
+        };
+
         public static readonly EncodingOptions Custom1080 = new EncodingOptions
         {
             PresetName = "1080p",
@@ -45,6 +64,7 @@ namespace FFGUI
             VideoFramerate = "25",
             VideoBitrate = "8192k",
             VideoScaleQuality = "4",
+            ForcedVideoCodec = "x264",
 
             IncludeAudio = true,
             AudioSampleRate = "48000",
@@ -52,129 +72,162 @@ namespace FFGUI
             AudioChannels = "2"
         };
 
-        public static readonly EncodingOptions[] Presets = new [] { Custom480, Custom720, Custom1080 };
+        public static readonly EncodingOptions[] Presets = new[] { Custom480, Custom720, Custom1080 };
 
-	    public string PresetName { get; set; }
+        public string PresetName { get; set; }
 
-		public bool IncludeVideo { get; set; }
+        public bool IncludeVideo { get; set; }
 
-		public string VideoResolution { get; set; }
-		private string VideoResolutionArgument {
-			get
-			{
-				if (IncludeVideo == false || String.IsNullOrEmpty(VideoResolution))
-				{
-					return String.Empty;
-				}
-				else
-				{
-					return String.Format("-s {0}", VideoResolution);
-				}
-			}
-		}
+        public string ForcedVideoCodec { get; set; }
+        private string ForcedVideoCodecArgument
+        {
+            get
+            {
+                if (IncludeVideo == false || String.IsNullOrEmpty(ForcedVideoCodec))
+                {
+                    return String.Empty;
+                }
+                else
+                {
+                    return String.Format("-codec:v {0}", ForcedVideoCodec);
+                }
+            }
+        }
 
-		public string VideoFramerate { get; set; }
-		private string VideoFramerateArgument
-		{
-			get
-			{
-				if (IncludeVideo == false || String.IsNullOrEmpty(VideoFramerate))
-				{
-					return String.Empty;
-				}
-				else
-				{
-					return String.Format("-r {0}", VideoFramerate);
-				}
-			}
-		}
+        public string VideoResolution { get; set; }
+        private string VideoResolutionArgument
+        {
+            get
+            {
+                if (IncludeVideo == false || String.IsNullOrEmpty(VideoResolution))
+                {
+                    return String.Empty;
+                }
+                else
+                {
+                    return String.Format("-s {0}", VideoResolution);
+                }
+            }
+        }
 
-		public string VideoBitrate { get; set; }
-		private string VideoBitrateArgument
-		{
-			get
-			{
-				if (IncludeVideo == false || String.IsNullOrEmpty(VideoBitrate))
-				{
-					return String.Empty;
-				}
-				else
-				{
-					return String.Format("-b {0}", VideoBitrate);
-				}
-			}
-		}
+        public string VideoFramerate { get; set; }
+        private string VideoFramerateArgument
+        {
+            get
+            {
+                if (IncludeVideo == false || String.IsNullOrEmpty(VideoFramerate))
+                {
+                    return String.Empty;
+                }
+                else
+                {
+                    return String.Format("-r {0}", VideoFramerate);
+                }
+            }
+        }
 
-		public string VideoScaleQuality { get; set; }
-		private string VideoScaleQualityArgument
-		{
-			get
-			{
-				if (IncludeVideo == false || String.IsNullOrEmpty(VideoScaleQuality))
-				{
-					return String.Empty;
-				}
-				else
-				{
-					return String.Format("-qscale {0}", VideoScaleQuality);
-				}
-			}
-		}
+        public string VideoBitrate { get; set; }
+        private string VideoBitrateArgument
+        {
+            get
+            {
+                if (IncludeVideo == false || String.IsNullOrEmpty(VideoBitrate))
+                {
+                    return String.Empty;
+                }
+                else
+                {
+                    return String.Format("-b {0}", VideoBitrate);
+                }
+            }
+        }
+
+        public string VideoScaleQuality { get; set; }
+        private string VideoScaleQualityArgument
+        {
+            get
+            {
+                if (IncludeVideo == false || String.IsNullOrEmpty(VideoScaleQuality))
+                {
+                    return String.Empty;
+                }
+                else
+                {
+                    return String.Format("-qscale {0}", VideoScaleQuality);
+                }
+            }
+        }
 
 
-		public bool IncludeAudio { get; set; }
+        public bool IncludeAudio { get; set; }
 
-		public string AudioSampleRate { get; set; }
-		private string AudioSampleRateArgument
-		{
-			get
-			{
-				if (IncludeAudio == false || String.IsNullOrEmpty(AudioSampleRate))
-				{
-					return String.Empty;
-				}
-				else
-				{
-					return String.Format("-ar {0}", AudioSampleRate);
-				}
-			}
-		}
+        public string ForcedAudioCodec { get; set; }
+        private string ForcedAudioCodecArgument
+        {
+            get
+            {
+                if (IncludeAudio == false || String.IsNullOrEmpty(ForcedAudioCodec))
+                {
+                    return String.Empty;
+                }
+                else
+                {
+                    return String.Format("-codec:a {0}", ForcedAudioCodec);
+                }
+            }
+        }
 
-		public string AudioBitrate { get; set; }
-		private string AudioBitrateArgument
-		{
-			get
-			{
-				if (IncludeAudio == false || String.IsNullOrEmpty(AudioBitrate))
-				{
-					return String.Empty;
-				}
-				else
-				{
-					return String.Format("-ab {0}", AudioBitrate);
-				}
-			}
-		}
+        public string AudioSampleRate { get; set; }
+        private string AudioSampleRateArgument
+        {
+            get
+            {
+                if (IncludeAudio == false || String.IsNullOrEmpty(AudioSampleRate))
+                {
+                    return String.Empty;
+                }
+                else
+                {
+                    return String.Format("-ar {0}", AudioSampleRate);
+                }
+            }
+        }
 
-		public string AudioChannels { get; set; }
-		private string AudioChannelsArgument
-		{
-			get
-			{
-				if (IncludeAudio == false || String.IsNullOrEmpty(AudioChannels))
-				{
-					return String.Empty;
-				}
-				else
-				{
-					return String.Format("-ac {0}", AudioChannels);
-				}
-			}
-		}
+        public string AudioBitrate { get; set; }
+        private string AudioBitrateArgument
+        {
+            get
+            {
+                if (IncludeAudio == false || String.IsNullOrEmpty(AudioBitrate))
+                {
+                    return String.Empty;
+                }
+                else
+                {
+                    return String.Format("-ab {0}", AudioBitrate);
+                }
+            }
+        }
 
-		public override string ToString()
-		{
-			return String.Format("{0} {1} {2} {3} {4} {5} {6}", VideoResolutionArgument, VideoFramerateArgument, VideoBitrateArgument, VideoScaleQualityArgument, AudioChannelsArgument, AudioSampleRateArgument, AudioBitrateArgument);
-		}
-	}
+        public string AudioChannels { get; set; }
+        private string AudioChannelsArgument
+        {
+            get
+            {
+                if (IncludeAudio == false || String.IsNullOrEmpty(AudioChannels))
+                {
+                    return String.Empty;
+                }
+                else
+                {
+                    return String.Format("-ac {0}", AudioChannels);
+                }
+            }
+        }
+
+        public override string ToString()
+        {
+            return String.Format("{0} {1} {2} {3} {4} {5} {6} {7} {8}", VideoResolutionArgument, VideoFramerateArgument, VideoBitrateArgument, VideoScaleQualityArgument, ForcedVideoCodecArgument, AudioChannelsArgument, AudioSampleRateArgument, AudioBitrateArgument, ForcedAudioCodecArgument);
+        }
+    }
 }

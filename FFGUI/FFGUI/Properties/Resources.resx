@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -114,25 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-	<data name="Form1_onStartConversion_Invalid_output_file">
-		<value xml:space="preserve">Invalid output file</value>
-	</data>
-	<data name="Form1_onStartConversion_No_output_file_selected">
-		<value xml:space="preserve">No output file selected</value>
-	</data>
-	<data name="Form1_onStartConversion_Invalid_input_file">
-		<value xml:space="preserve">Invalid input file</value>
-	</data>
-	<data name="Form1_onStartConversion_No_input_file_selected">
-		<value xml:space="preserve">No input file selected</value>
-	</data>
-	<data name="Form1_Form1_This_application_uses_FFMPEG_for_it_s_conversion__Please_select_where_ffmpeg_exe_can_be_found">
-		<value xml:space="preserve">This application uses FFMPEG for it's conversion. Please select where ffmpeg.exe can be found</value>
-	</data>
-	<data name="Form1_Form1_Missing_FFMPEG">
-		<value xml:space="preserve">Missing FFMPEG</value>
-	</data>
-	<data name="Form1_Form1_Without_FFMPEG_this_application_is_useless__closing_down">
-		<value xml:space="preserve">Without FFMPEG this application is useless, closing down</value>
-	</data>
+  <data name="Form1_onStartConversion_Invalid_output_file" xml:space="preserve">
+    <value>Invalid output file</value>
+  </data>
+  <data name="Form1_onStartConversion_No_output_file_selected" xml:space="preserve">
+    <value>No output file selected</value>
+  </data>
+  <data name="Form1_onStartConversion_Invalid_input_file" xml:space="preserve">
+    <value>Invalid input file</value>
+  </data>
+  <data name="Form1_onStartConversion_No_input_file_selected" xml:space="preserve">
+    <value>No input file selected</value>
+  </data>
+  <data name="Form1_Form1_This_application_uses_FFMPEG_for_it_s_conversion__Please_select_where_ffmpeg_exe_can_be_found" xml:space="preserve">
+    <value>This application uses FFMPEG for it's conversion. Please select where ffmpeg.exe can be found</value>
+  </data>
+  <data name="Form1_Form1_Missing_FFMPEG" xml:space="preserve">
+    <value>Missing FFMPEG</value>
+  </data>
+  <data name="Form1_Form1_Without_FFMPEG_this_application_is_useless__closing_down" xml:space="preserve">
+    <value>Without FFMPEG this application is useless, closing down</value>
+  </data>
+  <data name="FileFormats" xml:space="preserve">
+    <value>AVI|*.avi|MP4|*.mp4|MPG|*.mpg|MPEG|*.mpeg|Flash|*.flv|All Files|*.*</value>
+  </data>
 </root>

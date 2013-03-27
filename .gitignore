@@ -4,7 +4,6 @@
 *.pdb
 bin*
 obj*
-Properties*
 _ReSharper*
 *.sln.DotSettings.user
 *.orig

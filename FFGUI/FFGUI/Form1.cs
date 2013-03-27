@@ -33,7 +33,7 @@ namespace FFGUI
 				}
 			}
 			Debug.WriteLine(String.Format("Using ffmpeg at: \"{0}\"", ffmpeg));
-
+            
             saveFileDialog1.Filter = Resources.FileFormats;
             saveFileDialog1.DefaultExt = "mp4";
 

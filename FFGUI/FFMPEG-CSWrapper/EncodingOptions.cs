@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FFGUI
+namespace FFMPEG_CSWrapper
 {
     public sealed class EncodingOptions
     {
@@ -18,7 +18,9 @@ namespace FFGUI
             IncludeAudio = true,
             AudioSampleRate = "44100",
             AudioBitrate = "192k",
-            AudioChannels = "2"
+            AudioChannels = "2",
+            AudioScaleQuality = "4"
+            //ForcedAudioCodec = "MP3"
         };
 
         public static readonly EncodingOptions Custom480 = new EncodingOptions
@@ -30,12 +32,14 @@ namespace FFGUI
             VideoFramerate = "25",
             VideoBitrate = "1024k",
             VideoScaleQuality = "4",
-            ForcedVideoCodec = "x264",
+            //ForcedVideoCodec = "x264",
 
             IncludeAudio = true,
             AudioSampleRate = "48000",
             AudioBitrate = "192k",
-            AudioChannels = "2"
+            AudioChannels = "2",
+            AudioScaleQuality = "4"
+            //ForcedAudioCodec = "AC3"
         };
 
         public static readonly EncodingOptions Custom720 = new EncodingOptions
@@ -47,12 +51,14 @@ namespace FFGUI
             VideoFramerate = "25",
             VideoBitrate = "2048k",
             VideoScaleQuality = "4",
-            ForcedVideoCodec = "x264",
+            //ForcedVideoCodec = "x264",
 
             IncludeAudio = true,
             AudioSampleRate = "48000",
             AudioBitrate = "192k",
-            AudioChannels = "2"
+            AudioChannels = "2",
+            AudioScaleQuality = "4"
+            //ForcedAudioCodec = "AC3"
         };
 
         public static readonly EncodingOptions Custom1080 = new EncodingOptions
@@ -64,12 +70,14 @@ namespace FFGUI
             VideoFramerate = "25",
             VideoBitrate = "8192k",
             VideoScaleQuality = "4",
-            ForcedVideoCodec = "x264",
+            //ForcedVideoCodec = "x264",
 
             IncludeAudio = true,
             AudioSampleRate = "48000",
             AudioBitrate = "320k",
-            AudioChannels = "2"
+            AudioChannels = "2",
+            AudioScaleQuality = "4"
+            //ForcedAudioCodec = "AC3"
         };
 
         public static readonly EncodingOptions[] Presets = new[] { Custom480, Custom720, Custom1080 };
@@ -137,7 +145,8 @@ namespace FFGUI
                 }
                 else
                 {
-                    return String.Format("-b {0}", VideoBitrate);
+					//b:v
+                    return String.Format("-b:v {0}", VideoBitrate);
                 }
             }
         }
@@ -153,7 +162,7 @@ namespace FFGUI
                 }
                 else
                 {
-                    return String.Format("-qscale {0}", VideoScaleQuality);
+                    return String.Format("-q:v {0}", VideoScaleQuality);
                 }
             }
         }
@@ -204,6 +213,7 @@ namespace FFGUI
                 }
                 else
                 {
+					//b:a?
                     return String.Format("-ab {0}", AudioBitrate);
                 }
             }
@@ -225,9 +235,25 @@ namespace FFGUI
             }
         }
 
+        public string AudioScaleQuality { get; set; }
+        private string AudioScaleQualityArgument
+        {
+            get
+            {
+                if (IncludeAudio == false || String.IsNullOrEmpty(AudioScaleQuality))
+                {
+                    return String.Empty;
+                }
+                else
+                {
+                    return String.Format("-q:a {0}", AudioScaleQuality);
+                }
+            }
+        }
+
         public override string ToString()
         {
-            return String.Format("{0} {1} {2} {3} {4} {5} {6} {7} {8}", VideoResolutionArgument, VideoFramerateArgument, VideoBitrateArgument, VideoScaleQualityArgument, ForcedVideoCodecArgument, AudioChannelsArgument, AudioSampleRateArgument, AudioBitrateArgument, ForcedAudioCodecArgument);
+            return String.Format("{0} {1} {2} {3} {4} {5} {6} {7} {8} {9}", VideoResolutionArgument, VideoFramerateArgument, VideoBitrateArgument, VideoScaleQualityArgument, ForcedVideoCodecArgument, AudioChannelsArgument, AudioSampleRateArgument, AudioBitrateArgument, AudioScaleQualityArgument, ForcedAudioCodecArgument);
         }
     }
 }

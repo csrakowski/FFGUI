@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using FFMPEG_CSWrapper;
 
 namespace FFGUI
 {
@@ -102,7 +103,8 @@ namespace FFGUI
 				IncludeAudio = includeAudio.Checked,
 				AudioSampleRate = audioSamplerate.Text,
 				AudioBitrate = audioBitrate.Text,
-				AudioChannels = audioChannels.Text
+				AudioChannels = audioChannels.Text,
+                AudioScaleQuality = audioScaleQuality.Text,
 			};
 
 			return options;
@@ -119,7 +121,8 @@ namespace FFGUI
 			includeAudio.Checked = options.IncludeAudio;
 			audioSamplerate.Text = options.AudioSampleRate;
 			audioBitrate.Text = options.AudioBitrate;
-			audioChannels.Text = options.AudioChannels;
+            audioChannels.Text = options.AudioChannels;
+            audioScaleQuality.Text = options.AudioScaleQuality;
 		}
 
         private void OnSelectPreset(object sender, EventArgs e)

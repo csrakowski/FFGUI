@@ -61,6 +61,8 @@
             this.encodingOptionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.encodingOptionsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.presets = new System.Windows.Forms.ComboBox();
+            this.audioScaleQuality = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -361,11 +363,11 @@
             // 
             // encodingOptionsBindingSource
             // 
-            this.encodingOptionsBindingSource.DataSource = typeof(FFGUI.EncodingOptions);
+            this.encodingOptionsBindingSource.DataSource = typeof(FFMPEG_CSWrapper.EncodingOptions);
             // 
             // encodingOptionsBindingSource1
             // 
-            this.encodingOptionsBindingSource1.DataSource = typeof(FFGUI.EncodingOptions);
+            this.encodingOptionsBindingSource1.DataSource = typeof(FFMPEG_CSWrapper.EncodingOptions);
             // 
             // presets
             // 
@@ -376,11 +378,40 @@
             this.presets.TabIndex = 28;
             this.presets.SelectedIndexChanged += new System.EventHandler(this.OnSelectPreset);
             // 
+            // audioScaleQuality
+            // 
+            this.audioScaleQuality.FormattingEnabled = true;
+            this.audioScaleQuality.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"});
+            this.audioScaleQuality.Location = new System.Drawing.Point(536, 341);
+            this.audioScaleQuality.Margin = new System.Windows.Forms.Padding(4);
+            this.audioScaleQuality.Name = "audioScaleQuality";
+            this.audioScaleQuality.Size = new System.Drawing.Size(160, 24);
+            this.audioScaleQuality.TabIndex = 30;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(448, 344);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(88, 17);
+            this.label13.TabIndex = 29;
+            this.label13.Text = "Scale quality";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(824, 532);
+            this.Controls.Add(this.audioScaleQuality);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.presets);
             this.Controls.Add(this.audioBitrate);
             this.Controls.Add(this.audioSamplerate);
@@ -459,6 +490,8 @@
         private System.Windows.Forms.BindingSource encodingOptionsBindingSource;
         private System.Windows.Forms.BindingSource encodingOptionsBindingSource1;
         private System.Windows.Forms.ComboBox presets;
+        private System.Windows.Forms.ComboBox audioScaleQuality;
+        private System.Windows.Forms.Label label13;
 	}
 }
 

@@ -77,8 +77,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EncodingOptions.cs" />
-    <Compile Include="FFWrapper.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +116,12 @@
       <ProductName>Microsoft.Net.Framework.3.5.SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FFMPEG-CSWrapper\FFMPEG-CSWrapper.csproj">
+      <Project>{aa83973a-6ad4-4963-94ef-75b9f1efcdda}</Project>
+      <Name>FFMPEG-CSWrapper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

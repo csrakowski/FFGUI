@@ -139,6 +139,6 @@
     <value>Without FFMPEG this application is useless, closing down</value>
   </data>
   <data name="FileFormats" xml:space="preserve">
-    <value>AVI|*.avi|MP4|*.mp4|MPG|*.mpg|MPEG|*.mpeg|Flash|*.flv|All Files|*.*</value>
+    <value>AVI|*.avi|MP4|*.mp4|MPEG|*.mpg|MP3|*.mp3|Flash|*.flv|All Files|*.*</value>
   </data>
 </root>

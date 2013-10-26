@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using FFMPEG_CSWrapper;
+using System.Threading.Tasks;
 
 namespace FFGUI
 {
@@ -46,7 +47,7 @@ namespace FFGUI
 		    //SetEncodingOptions(EncodingOptions.Custom720);
 		}
 
-		private void OnStartConversion(object sender, EventArgs e)
+		private async void OnStartConversion(object sender, EventArgs e)
 		{
 			if(String.IsNullOrEmpty(inputFileName.Text))
 			{
@@ -59,9 +60,22 @@ namespace FFGUI
 				return;
 			}
 			var advancedOptions = GetEncodingOptions();
-			FFWrapper.StartConversion(inputFileName.Text, outputFileName.Text, advancedOptions);
+            if (advancedOptions == null)
+            {
+                return;
+            }
+            try
+            {
+			    var success = await FFWrapper.StartConversion(inputFileName.Text, outputFileName.Text, advancedOptions);
+                var msg = String.Format("The conversion completed successfully. The result is saved at: \"{0}\"", outputFileName.Text);
+                MessageBox.Show(this, msg, "Conversion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 		}
-
+        
 		private void OnBrowseInputFile(object sender, EventArgs e)
 		{
 		    var result = openFileDialog1.ShowDialog(this);
@@ -82,8 +96,9 @@ namespace FFGUI
 
 		private EncodingOptions GetEncodingOptions()
 		{
-		    var res = "";
-		    var p = videoResolution.Text.Split('x');
+		    var res = String.Empty;
+            var resText = videoResolution.Text;
+		    var p = resText.Split('x');
             if (p.Length > 1)
             {
                 uint a, b;
@@ -91,6 +106,11 @@ namespace FFGUI
                 {
                     res = a + "x" + b;
                 }
+            }
+            if ((!String.IsNullOrEmpty(resText)) && String.IsNullOrEmpty(res))
+            {
+                MessageBox.Show(this, String.Format("\"{0}\" is an invalid resolution. Please enter one in the format of \"1920x1080\" or leave the field blank", resText), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
 			var options = new EncodingOptions
 			{

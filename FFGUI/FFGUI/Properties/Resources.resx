@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Form1_onStartConversion_Invalid_output_file" xml:space="preserve">
     <value>Invalid output file</value>
@@ -139,6 +139,6 @@
     <value>Without FFMPEG this application is useless, closing down</value>
   </data>
   <data name="FileFormats" xml:space="preserve">
-    <value>AVI|*.avi|MP4|*.mp4|MPEG|*.mpg|MP3|*.mp3|Flash|*.flv|All Files|*.*</value>
+    <value>MP4|*.mp4|MP3|*.mp3|AVI|*.avi|MPEG|*.mpg|Flash|*.flv|All Files|*.*</value>
   </data>
 </root>

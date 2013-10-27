@@ -19,7 +19,7 @@ namespace FFMPEG_CSWrapper
             {
                 Debug.WriteLine(String.Format("Starting Conversion: \"{0}\" --> \"{1}\"", inputFile, outputFile));
 
-                var commandLineArguments = String.Format("-i \"{0}\" {2} \"{1}\"", inputFile, outputFile, advancedOptions);
+                var commandLineArguments = String.Format("-i \"{0}\" {2} \"{1}\"", inputFile, outputFile, advancedOptions.ToString());
                 Debug.WriteLine("Using arguments: " + commandLineArguments);
 
                 var ffmpeg = ConfigurationManager.AppSettings["FFMPEG_PATH"];

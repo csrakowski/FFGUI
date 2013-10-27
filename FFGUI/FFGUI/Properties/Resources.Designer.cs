@@ -61,7 +61,7 @@ namespace FFGUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AVI|*.avi|MP4|*.mp4|MPEG|*.mpg|MP3|*.mp3|Flash|*.flv|All Files|*.*.
+        ///   Looks up a localized string similar to MP4|*.mp4|MP3|*.mp3|AVI|*.avi|MPEG|*.mpg|Flash|*.flv|All Files|*.*.
         /// </summary>
         internal static string FileFormats {
             get {

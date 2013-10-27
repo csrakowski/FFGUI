@@ -35,9 +35,9 @@ namespace FFGUI
 				}
 			}
 			Debug.WriteLine(String.Format("Using ffmpeg at: \"{0}\"", ffmpeg));
-            
+
             saveFileDialog1.Filter = Resources.FileFormats;
-            saveFileDialog1.DefaultExt = "mp4";
+            saveFileDialog1.DefaultExt = "MP4";
 
 		    foreach (var preset in EncodingOptions.Presets)
 		    {
@@ -78,15 +78,18 @@ namespace FFGUI
         
 		private void OnBrowseInputFile(object sender, EventArgs e)
 		{
+            openFileDialog1.FileName = inputFileName.Text;
 		    var result = openFileDialog1.ShowDialog(this);
 			if(result == DialogResult.OK)
 			{
 				inputFileName.Text = openFileDialog1.FileName;
+                outputFileName.Text = openFileDialog1.FileName + ".mp4";
 			}
 		}
 
 		private void OnBrowseOutputFile(object sender, EventArgs e)
-		{            
+		{
+            saveFileDialog1.FileName = outputFileName.Text;
             var result = saveFileDialog1.ShowDialog(this);
 			if(result == DialogResult.OK)
 			{

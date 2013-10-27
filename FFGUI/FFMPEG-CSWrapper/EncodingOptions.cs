@@ -6,21 +6,36 @@ namespace FFMPEG_CSWrapper
     {
         public string PresetName { get; set; }
 
+        #region Video
+
         public bool IncludeVideo { get; set; }
+        private string VideoArguments
+        {
+            get
+            {
+                if (IncludeVideo)
+                {
+                    return String.Format("{0} {1} {2} {3} {4}", VideoResolutionArgument, VideoFramerateArgument, VideoBitrateArgument, VideoScaleQualityArgument, ForcedVideoCodecArgument);
+                }
+                else
+                {
+                    return "-vn";
+                }
+            }
+        }
 
         public string ForcedVideoCodec { get; set; }
         private string ForcedVideoCodecArgument
         {
             get
             {
-                if (IncludeVideo == false || String.IsNullOrEmpty(ForcedVideoCodec))
+                var codec = ForcedVideoCodec;
+                if (String.IsNullOrEmpty(codec))
                 {
                     return String.Empty;
+                    //codec = "copy";
                 }
-                else
-                {
-                    return String.Format("-codec:v {0}", ForcedVideoCodec);
-                }
+                return String.Format("-codec:v {0}", codec);
             }
         }
 
@@ -29,7 +44,7 @@ namespace FFMPEG_CSWrapper
         {
             get
             {
-                if (IncludeVideo == false || String.IsNullOrEmpty(VideoResolution))
+                if (String.IsNullOrEmpty(VideoResolution))
                 {
                     return String.Empty;
                 }
@@ -45,7 +60,7 @@ namespace FFMPEG_CSWrapper
         {
             get
             {
-                if (IncludeVideo == false || String.IsNullOrEmpty(VideoFramerate))
+                if (String.IsNullOrEmpty(VideoFramerate))
                 {
                     return String.Empty;
                 }
@@ -61,13 +76,12 @@ namespace FFMPEG_CSWrapper
         {
             get
             {
-                if (IncludeVideo == false || String.IsNullOrEmpty(VideoBitrate))
+                if (String.IsNullOrEmpty(VideoBitrate))
                 {
                     return String.Empty;
                 }
                 else
                 {
-					//b:v
                     return String.Format("-b:v {0}", VideoBitrate);
                 }
             }
@@ -78,7 +92,7 @@ namespace FFMPEG_CSWrapper
         {
             get
             {
-                if (IncludeVideo == false || String.IsNullOrEmpty(VideoScaleQuality))
+                if (String.IsNullOrEmpty(VideoScaleQuality))
                 {
                     return String.Empty;
                 }
@@ -89,22 +103,37 @@ namespace FFMPEG_CSWrapper
             }
         }
 
+        #endregion
+
+        #region Audio
 
         public bool IncludeAudio { get; set; }
+
+        private string AudioArguments {
+            get {
+                if (IncludeAudio)
+                {
+                    return String.Format("{0} {1} {2} {3} {4}", AudioChannelsArgument, AudioSampleRateArgument, AudioBitrateArgument, AudioScaleQualityArgument, ForcedAudioCodecArgument);
+                }
+                else
+                {
+                    return "-an";
+                }
+            }
+        }
 
         public string ForcedAudioCodec { get; set; }
         private string ForcedAudioCodecArgument
         {
             get
             {
-                if (IncludeAudio == false || String.IsNullOrEmpty(ForcedAudioCodec))
+                var codec = ForcedAudioCodec;
+                if (String.IsNullOrEmpty(codec))
                 {
                     return String.Empty;
+                    //codec = "copy";
                 }
-                else
-                {
-                    return String.Format("-codec:a {0}", ForcedAudioCodec);
-                }
+                return String.Format("-codec:a {0}", codec);
             }
         }
 
@@ -113,7 +142,7 @@ namespace FFMPEG_CSWrapper
         {
             get
             {
-                if (IncludeAudio == false || String.IsNullOrEmpty(AudioSampleRate))
+                if (String.IsNullOrEmpty(AudioSampleRate))
                 {
                     return String.Empty;
                 }
@@ -129,7 +158,7 @@ namespace FFMPEG_CSWrapper
         {
             get
             {
-                if (IncludeAudio == false || String.IsNullOrEmpty(AudioBitrate))
+                if (String.IsNullOrEmpty(AudioBitrate))
                 {
                     return String.Empty;
                 }
@@ -146,7 +175,7 @@ namespace FFMPEG_CSWrapper
         {
             get
             {
-                if (IncludeAudio == false || String.IsNullOrEmpty(AudioChannels))
+                if (String.IsNullOrEmpty(AudioChannels))
                 {
                     return String.Empty;
                 }
@@ -162,7 +191,7 @@ namespace FFMPEG_CSWrapper
         {
             get
             {
-                if (IncludeAudio == false || String.IsNullOrEmpty(AudioScaleQuality))
+                if (String.IsNullOrEmpty(AudioScaleQuality))
                 {
                     return String.Empty;
                 }
@@ -173,9 +202,11 @@ namespace FFMPEG_CSWrapper
             }
         }
 
+        #endregion
+
         public override string ToString()
         {
-            return String.Format("{0} {1} {2} {3} {4} {5} {6} {7} {8} {9}", VideoResolutionArgument, VideoFramerateArgument, VideoBitrateArgument, VideoScaleQualityArgument, ForcedVideoCodecArgument, AudioChannelsArgument, AudioSampleRateArgument, AudioBitrateArgument, AudioScaleQualityArgument, ForcedAudioCodecArgument);
+            return String.Format("{0} {1} -y", VideoArguments, AudioArguments);
         }
     }
 }

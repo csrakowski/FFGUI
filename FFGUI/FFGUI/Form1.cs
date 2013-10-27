@@ -66,9 +66,20 @@ namespace FFGUI
             }
             try
             {
+                toolStripStatusLabel1.Text = "Converting..";
+                toolStripProgressBar1.Visible = true;
+
 			    var success = await FFWrapper.StartConversion(inputFileName.Text, outputFileName.Text, advancedOptions);
-                var msg = String.Format("The conversion completed successfully. The result is saved at: \"{0}\"", outputFileName.Text);
-                MessageBox.Show(this, msg, "Conversion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var messageBoxMessage = String.Format("The conversion completed successfully. The result is saved at: \"{0}\".", outputFileName.Text);
+                var toolStripMessage = "Ready";
+                if (!success)
+                {
+                    toolStripMessage = "Conversion Failed";
+                    messageBoxMessage = "Something went wrong during conversion. Please try again.";
+                }
+                toolStripStatusLabel1.Text = toolStripMessage;
+                toolStripProgressBar1.Visible = false;
+                MessageBox.Show(this, messageBoxMessage, "Conversion Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -82,8 +93,10 @@ namespace FFGUI
 		    var result = openFileDialog1.ShowDialog(this);
 			if(result == DialogResult.OK)
 			{
-				inputFileName.Text = openFileDialog1.FileName;
-                outputFileName.Text = openFileDialog1.FileName + ".mp4";
+                var fileName = openFileDialog1.FileName;
+				inputFileName.Text = fileName;
+                fileName = fileName.Substring(0, fileName.LastIndexOf('.'));
+                outputFileName.Text = fileName + ".mp4";
 			}
 		}
 

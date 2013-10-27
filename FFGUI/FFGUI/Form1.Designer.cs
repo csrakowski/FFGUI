@@ -63,6 +63,9 @@
             this.presets = new System.Windows.Forms.ComboBox();
             this.audioScaleQuality = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -80,6 +83,9 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripProgressBar1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 414);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(620, 22);
@@ -346,7 +352,7 @@
             // 
             this.presets.FormattingEnabled = true;
             this.presets.Location = new System.Drawing.Point(239, 125);
-            this.presets.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.presets.Margin = new System.Windows.Forms.Padding(2);
             this.presets.Name = "presets";
             this.presets.Size = new System.Drawing.Size(103, 21);
             this.presets.TabIndex = 28;
@@ -376,6 +382,21 @@
             this.label13.Size = new System.Drawing.Size(67, 13);
             this.label13.TabIndex = 29;
             this.label13.Text = "Scale quality";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(39, 17);
+            this.toolStripStatusLabel1.Text = "Ready";
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.CausesValidation = false;
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.toolStripProgressBar1.Visible = false;
             // 
             // Form1
             // 
@@ -420,6 +441,8 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FFGUI";
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource1)).EndInit();
             this.ResumeLayout(false);
@@ -463,6 +486,8 @@
         private System.Windows.Forms.ComboBox presets;
         private System.Windows.Forms.ComboBox audioScaleQuality;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
 	}
 }
 

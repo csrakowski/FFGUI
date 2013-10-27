@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="FFGUI.exe" version="1.0.0.0" publicKeyToken="f66bd81f41bc8189" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="FFGUI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="FFGUI.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FFGUI.exe" size="24064">
+      <assemblyIdentity name="FFGUI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>gKgJHLVcrBqE3cJgH7tqdd04LjAtEYjYvUawt65xEr4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FFMPEG-CSWrapper.dll" size="11776">
+      <assemblyIdentity name="FFMPEG-CSWrapper" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>We2x4FwE3YKPP1QMSTaC/j7euL7XOEO8/fhMMnWEEDs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="FFGUI.exe.config" size="1118">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>fajze229VrAcMkWPtqHpWe35RXf2S4OpQKj2ls3nbRo=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=christiaan-PC\christiaan" issuerKeyHash="631828d3e33584a7fee929b1690b557c91fc33bc" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>GSRtv97TVIPKbGmb7mhgqOziNjE=</DigestValue></Reference></SignedInfo><SignatureValue>Gt68xzGyx+Gf8ZlIdje4EWzhKM0IGaPQZMqtE97xESDvqrzYWXUHJP/4yl7cUIYgQeXIs5fjX1bPu+kGRFgTMRHcDDE+YfuF25XT5eIr7nbjqgIL3vYcwC1QS9DSPGnVUTkhFuw7CXZsYZfxtIDOKcmAbCqVt2/NLfhVzNn+BtU=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>yPUkB4bMkVO76OKSYEHlYivV4CIYHWzd0IF6rDJ0EcZ9hvczvqnpotiQpnsg5Dgpm9BvSg29+6/OSGqwGsvUaTxHLLH07t3bPM2YPQmT44k7Xps4pyg4IwfRcMViD8nyNbtZyjWZleVx5hvR4dpdcmXHaeIR7RiXPJ9Aew6jpW0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="3136e2eca86068ee9b696cca8354d3debf6d2419" Description="" Url=""><as:assemblyIdentity name="FFGUI.exe" version="1.0.0.0" publicKeyToken="f66bd81f41bc8189" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=christiaan-PC\christiaan</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>b1kJu0wSknPD/ZiGeNYZvsmLzFQ=</DigestValue></Reference></SignedInfo><SignatureValue>kr9Y+GmLeWXnSf8+ti5cl/r97tboKIc17QPgCUL4QU/zaEEWuMQOJWf1uyySpMWLO+Uq3U6ueSXN5EHm/13BejYwa4x8SqlnYVVj5GfoTNzJuvX80YWluCfjzfLIuLrrgQvN90IINt8DSCNy11kVjR95vakaJ6E1GUsQmy/Vgrk=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>yPUkB4bMkVO76OKSYEHlYivV4CIYHWzd0IF6rDJ0EcZ9hvczvqnpotiQpnsg5Dgpm9BvSg29+6/OSGqwGsvUaTxHLLH07t3bPM2YPQmT44k7Xps4pyg4IwfRcMViD8nyNbtZyjWZleVx5hvR4dpdcmXHaeIR7RiXPJ9Aew6jpW0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB+TCCAWKgAwIBAgIQcREylZjF8odHcTtNg5bICjANBgkqhkiG9w0BAQUFADA7MTkwNwYDVQQDHjAAYwBoAHIAaQBzAHQAaQBhAGEAbgAtAFAAQwBcAGMAaAByAGkAcwB0AGkAYQBhAG4wHhcNMTMwMTI0MTUxNTI1WhcNMTQwMTI0MjExNTI1WjA7MTkwNwYDVQQDHjAAYwBoAHIAaQBzAHQAaQBhAGEAbgAtAFAAQwBcAGMAaAByAGkAcwB0AGkAYQBhAG4wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMj1JAeGzJFTu+jikmBB5WIr1eAiGB1s3dCBeqwydBHGfYb3M76p6aLYkKZ7IOQ4KZvQb0oNvfuvzkhqsBrL1Gk8Ryyx9O7d2zzNmD0Jk+OJO16bOKcoOCMH0XDFYg/J8jW7Wco1mZXlceYb0eHaXXJlx2niEe0YlzyfQHsOo6VtAgMBAAEwDQYJKoZIhvcNAQEFBQADgYEAnmYgaBhDpe5TeNaXwIpQPiTH5jFnFZ9sSigoE6C2/QS/2+jhPnRCNnwoldidS+8vHe7D8QTVtkymuH5Hn9VatrRagCWr12RDm0DLH5yaH51AThWOcFgWi7+jSY8XiyXnc9vHWaMkV+zELJALiHcxAbxWmzuibiciNDSybRMbxRQ=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

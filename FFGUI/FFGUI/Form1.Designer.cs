@@ -65,6 +65,7 @@
             this.presets = new System.Windows.Forms.ComboBox();
             this.audioScaleQuality = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource1)).BeginInit();
@@ -399,6 +400,10 @@
             this.label13.TabIndex = 29;
             this.label13.Text = "Scale quality";
             // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyVideos;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -490,6 +495,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
 	}
 }
 

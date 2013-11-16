@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -76,6 +77,29 @@ namespace FFMPEG_CSWrapper
                 tcs.TrySetException(ex);
                 return tcs.Task;
             }
+        }
+
+        public static async Task<bool> StartBatchConversion(string inputFolder, string outputFolder, string outputFormat, EncodingOptions advancedOptions)
+        {
+            var result = new List<bool>();
+            var di = new DirectoryInfo(inputFolder);
+            var files = di.GetFiles();
+            foreach(var file in files)
+            {
+                var status = false;
+                try
+                {
+                    var inName = file.FullName;
+                    var outName = String.Format("{0}\\{1}.{2}", outputFolder, file.Name, outputFormat);
+                    status = await StartConversion(inName, outName, advancedOptions);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception in FFWrapper.StartBatchConversion: " + ex.Message);
+                }
+                result.Add(status);
+            }
+            return result.All(b => b);
         }
     }
 }

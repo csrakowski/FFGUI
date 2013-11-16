@@ -69,13 +69,29 @@ namespace FFGUI
                 toolStripStatusLabel1.Text = "Converting...";
                 toolStripProgressBar1.Visible = true;
 
-			    var success = await FFWrapper.StartConversion(inputFileName.Text, outputFileName.Text, advancedOptions);
+                bool success = false;
+                if (checkBoxBatchMode.Checked)
+                {
+                    string outputFormat = "MP4";
+                    success = await FFWrapper.StartBatchConversion(inputFileName.Text, outputFileName.Text, outputFormat, advancedOptions);
+                }
+                else
+                {
+                    success = await FFWrapper.StartConversion(inputFileName.Text, outputFileName.Text, advancedOptions);
+                }
                 var messageBoxMessage = String.Format("The conversion completed successfully. The result is saved at: \"{0}\".", outputFileName.Text);
                 var toolStripMessage = "Ready";
                 if (!success)
                 {
                     toolStripMessage = "Conversion Failed";
-                    messageBoxMessage = "Something went wrong during conversion. Please try again.";
+                    if (checkBoxBatchMode.Checked)
+                    {
+                        messageBoxMessage = "Not all files could be converted succesfully. Please review the log and try again.";
+                    }
+                    else
+                    {
+                        messageBoxMessage = "Something went wrong during conversion. Please try again.";
+                    }
                 }
                 toolStripStatusLabel1.Text = toolStripMessage;
                 toolStripProgressBar1.Visible = false;
@@ -89,25 +105,51 @@ namespace FFGUI
         
 		private void OnBrowseInputFile(object sender, EventArgs e)
 		{
-            openFileDialog1.FileName = inputFileName.Text;
-		    var result = openFileDialog1.ShowDialog(this);
-			if(result == DialogResult.OK)
-			{
-                var fileName = openFileDialog1.FileName;
-				inputFileName.Text = fileName;
-                fileName = fileName.Substring(0, fileName.LastIndexOf('.'));
-                outputFileName.Text = fileName + ".mp4";
-			}
+            if (checkBoxBatchMode.Checked)
+            {
+                folderBrowserDialog1.SelectedPath = inputFileName.Text;
+                var result = folderBrowserDialog1.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    var fileName = folderBrowserDialog1.SelectedPath;
+                    inputFileName.Text = fileName;
+                    outputFileName.Text = fileName + " output";
+                }
+            }
+            else
+            {
+                openFileDialog1.FileName = inputFileName.Text;
+                var result = openFileDialog1.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    var fileName = openFileDialog1.FileName;
+                    inputFileName.Text = fileName;
+                    fileName = fileName.Substring(0, fileName.LastIndexOf('.'));
+                    outputFileName.Text = fileName + ".mp4";
+                }
+            }
 		}
 
 		private void OnBrowseOutputFile(object sender, EventArgs e)
 		{
-            saveFileDialog1.FileName = outputFileName.Text;
-            var result = saveFileDialog1.ShowDialog(this);
-			if(result == DialogResult.OK)
-			{
-				outputFileName.Text = saveFileDialog1.FileName;
-			}
+            if (checkBoxBatchMode.Checked)
+            {
+                folderBrowserDialog1.SelectedPath = outputFileName.Text;
+                var result = folderBrowserDialog1.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    outputFileName.Text = folderBrowserDialog1.SelectedPath;
+                }
+            }
+            else
+            {
+                saveFileDialog1.FileName = outputFileName.Text;
+                var result = saveFileDialog1.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    outputFileName.Text = saveFileDialog1.FileName;
+                }
+            }
 		}
 
 		private EncodingOptions GetEncodingOptions()

@@ -60,13 +60,13 @@
             this.audioChannels = new System.Windows.Forms.ComboBox();
             this.audioSamplerate = new System.Windows.Forms.TextBox();
             this.audioBitrate = new System.Windows.Forms.TextBox();
-            this.encodingOptionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.encodingOptionsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.presets = new System.Windows.Forms.ComboBox();
             this.audioScaleQuality = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.checkBoxBatchMode = new System.Windows.Forms.CheckBox();
+            this.encodingOptionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.encodingOptionsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource1)).BeginInit();
@@ -358,14 +358,6 @@
             this.audioBitrate.Size = new System.Drawing.Size(121, 20);
             this.audioBitrate.TabIndex = 27;
             // 
-            // encodingOptionsBindingSource
-            // 
-            this.encodingOptionsBindingSource.DataSource = typeof(FFMPEG_CSWrapper.EncodingOptions);
-            // 
-            // encodingOptionsBindingSource1
-            // 
-            this.encodingOptionsBindingSource1.DataSource = typeof(FFMPEG_CSWrapper.EncodingOptions);
-            // 
             // presets
             // 
             this.presets.FormattingEnabled = true;
@@ -401,10 +393,6 @@
             this.label13.TabIndex = 29;
             this.label13.Text = "Scale quality";
             // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyVideos;
-            // 
             // checkBoxBatchMode
             // 
             this.checkBoxBatchMode.AutoSize = true;
@@ -414,6 +402,14 @@
             this.checkBoxBatchMode.TabIndex = 31;
             this.checkBoxBatchMode.Text = "Batch mode (Folders)";
             this.checkBoxBatchMode.UseVisualStyleBackColor = true;
+            // 
+            // encodingOptionsBindingSource
+            // 
+            this.encodingOptionsBindingSource.DataSource = typeof(FFMPEG_CSWrapper.EncodingOptions);
+            // 
+            // encodingOptionsBindingSource1
+            // 
+            this.encodingOptionsBindingSource1.DataSource = typeof(FFMPEG_CSWrapper.EncodingOptions);
             // 
             // Form1
             // 

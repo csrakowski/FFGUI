@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Logger;
+using System.Diagnostics;
 
 namespace FFMPEG_CSWrapper
 {
@@ -18,10 +19,10 @@ namespace FFMPEG_CSWrapper
 
             try
             {
-                Debug.WriteLine(String.Format("Starting Conversion: \"{0}\" --> \"{1}\"", inputFile, outputFile));
+                SimpleLogger.LogMessage(String.Format("Starting Conversion: \"{0}\" --> \"{1}\"", inputFile, outputFile));
 
                 var commandLineArguments = String.Format("-i \"{0}\" {2} \"{1}\"", inputFile, outputFile, advancedOptions.ToString());
-                Debug.WriteLine("Using arguments: " + commandLineArguments);
+                SimpleLogger.LogMessage("Using arguments: " + commandLineArguments);
 
                 var ffmpeg = ConfigurationManager.AppSettings["FFMPEG_PATH"];
                 var procStartInfo = new ProcessStartInfo(ffmpeg, commandLineArguments)
@@ -46,17 +47,17 @@ namespace FFMPEG_CSWrapper
                 //*
                 p.Exited += (o, args) =>
                 {
-                    Debug.WriteLine("Conversion done");
+                    SimpleLogger.LogMessage("Conversion done");
                     p.Dispose();
                     tcs.TrySetResult(true);
                 };
                 p.OutputDataReceived += (o, args) =>
                 {
-                    Debug.WriteLine(args.Data, "Messages");
+                    SimpleLogger.LogMessage(args.Data);
                 };
                 p.ErrorDataReceived += (o, args) =>
                 {
-                    Debug.WriteLine(args.Data, "Errors");
+                    SimpleLogger.LogMessage(args.Data, "Errors");
                 };
                 //*/
                 if(p.Start())
@@ -73,7 +74,7 @@ namespace FFMPEG_CSWrapper
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Exception in FFWrapper.StartConversion: " + ex.Message);
+                SimpleLogger.LogMessage("Exception in FFWrapper.StartConversion: " + ex.Message, "Exceptions");
                 tcs.TrySetException(ex);
                 return tcs.Task;
             }
@@ -81,6 +82,10 @@ namespace FFMPEG_CSWrapper
 
         public static async Task<bool> StartBatchConversion(string inputFolder, string outputFolder, string outputFormat, EncodingOptions advancedOptions)
         {
+            if(!Directory.Exists(outputFolder)) {
+                Directory.CreateDirectory(outputFolder);
+            }
+
             var result = new List<bool>();
             var di = new DirectoryInfo(inputFolder);
             var files = di.GetFiles();
@@ -95,7 +100,7 @@ namespace FFMPEG_CSWrapper
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("Exception in FFWrapper.StartBatchConversion: " + ex.Message);
+                    SimpleLogger.LogMessage("Exception in FFWrapper.StartBatchConversion: " + ex.Message);
                 }
                 result.Add(status);
             }

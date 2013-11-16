@@ -66,6 +66,7 @@
             this.audioScaleQuality = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.checkBoxBatchMode = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource1)).BeginInit();
@@ -404,11 +405,22 @@
             // 
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyVideos;
             // 
+            // checkBoxBatchMode
+            // 
+            this.checkBoxBatchMode.AutoSize = true;
+            this.checkBoxBatchMode.Location = new System.Drawing.Point(16, 99);
+            this.checkBoxBatchMode.Name = "checkBoxBatchMode";
+            this.checkBoxBatchMode.Size = new System.Drawing.Size(126, 17);
+            this.checkBoxBatchMode.TabIndex = 31;
+            this.checkBoxBatchMode.Text = "Batch mode (Folders)";
+            this.checkBoxBatchMode.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 437);
+            this.Controls.Add(this.checkBoxBatchMode);
             this.Controls.Add(this.audioScaleQuality);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.presets);
@@ -496,6 +508,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.CheckBox checkBoxBatchMode;
 	}
 }
 

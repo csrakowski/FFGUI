@@ -66,7 +66,7 @@ namespace FFGUI
             }
             try
             {
-                toolStripStatusLabel1.Text = "Converting..";
+                toolStripStatusLabel1.Text = "Converting...";
                 toolStripProgressBar1.Visible = true;
 
 			    var success = await FFWrapper.StartConversion(inputFileName.Text, outputFileName.Text, advancedOptions);

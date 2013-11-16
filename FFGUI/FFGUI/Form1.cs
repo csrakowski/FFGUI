@@ -39,6 +39,15 @@ namespace FFGUI
             saveFileDialog1.Filter = Resources.FileFormats;
             saveFileDialog1.DefaultExt = "MP4";
 
+            conversionFormats.Items.AddRange(new[] {
+                "MP4",
+                "MP3",
+                "MPEG",
+                "AVI",
+                "FLV"
+            });
+            conversionFormats.SelectedIndex = 0;
+
 		    foreach (var preset in EncodingOptions.Presets)
 		    {
 		        presets.Items.Add(preset.PresetName);
@@ -72,7 +81,7 @@ namespace FFGUI
                 bool success = false;
                 if (checkBoxBatchMode.Checked)
                 {
-                    string outputFormat = "MP4";
+                    string outputFormat = conversionFormats.SelectedItem.ToString();
                     success = await FFWrapper.StartBatchConversion(inputFileName.Text, outputFileName.Text, outputFormat, advancedOptions);
                 }
                 else
@@ -206,6 +215,11 @@ namespace FFGUI
         private void OnSelectPreset(object sender, EventArgs e)
         {
             SetEncodingOptions(EncodingOptions.Presets[presets.SelectedIndex]);
+        }
+
+        private void OnChangeBatchMode(object sender, EventArgs e)
+        {
+            conversionFormats.Visible = checkBoxBatchMode.Checked;
         }
 	}
 }

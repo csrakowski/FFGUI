@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFGUI", "FFGUI\FFGUI.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFMPEG-CSWrapper", "FFMPEG-CSWrapper\FFMPEG-CSWrapper.csproj", "{AA83973A-6AD4-4963-94EF-75B9F1EFCDDA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{B128AC9F-D1B3-4538-98DA-6D2BFF01979B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,16 @@ Global
 		{AA83973A-6AD4-4963-94EF-75B9F1EFCDDA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{AA83973A-6AD4-4963-94EF-75B9F1EFCDDA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{AA83973A-6AD4-4963-94EF-75B9F1EFCDDA}.Release|x86.ActiveCfg = Release|Any CPU
+		{B128AC9F-D1B3-4538-98DA-6D2BFF01979B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B128AC9F-D1B3-4538-98DA-6D2BFF01979B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B128AC9F-D1B3-4538-98DA-6D2BFF01979B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B128AC9F-D1B3-4538-98DA-6D2BFF01979B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B128AC9F-D1B3-4538-98DA-6D2BFF01979B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B128AC9F-D1B3-4538-98DA-6D2BFF01979B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B128AC9F-D1B3-4538-98DA-6D2BFF01979B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B128AC9F-D1B3-4538-98DA-6D2BFF01979B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B128AC9F-D1B3-4538-98DA-6D2BFF01979B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B128AC9F-D1B3-4538-98DA-6D2BFF01979B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

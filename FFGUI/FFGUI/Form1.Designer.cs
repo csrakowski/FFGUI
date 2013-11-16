@@ -67,6 +67,7 @@
             this.checkBoxBatchMode = new System.Windows.Forms.CheckBox();
             this.encodingOptionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.encodingOptionsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.conversionFormats = new System.Windows.Forms.ComboBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.encodingOptionsBindingSource1)).BeginInit();
@@ -176,7 +177,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 125);
+            this.label3.Location = new System.Drawing.Point(12, 151);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(212, 13);
             this.label3.TabIndex = 8;
@@ -185,7 +186,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 192);
+            this.label4.Location = new System.Drawing.Point(12, 218);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 9;
@@ -194,7 +195,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 220);
+            this.label5.Location = new System.Drawing.Point(12, 246);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 13);
             this.label5.TabIndex = 10;
@@ -203,7 +204,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 249);
+            this.label6.Location = new System.Drawing.Point(12, 275);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(54, 13);
             this.label6.TabIndex = 11;
@@ -212,7 +213,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 278);
+            this.label7.Location = new System.Drawing.Point(12, 304);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(67, 13);
             this.label7.TabIndex = 12;
@@ -220,21 +221,21 @@
             // 
             // videoResolution
             // 
-            this.videoResolution.Location = new System.Drawing.Point(80, 189);
+            this.videoResolution.Location = new System.Drawing.Point(80, 215);
             this.videoResolution.Name = "videoResolution";
             this.videoResolution.Size = new System.Drawing.Size(144, 20);
             this.videoResolution.TabIndex = 13;
             // 
             // videoBitrate
             // 
-            this.videoBitrate.Location = new System.Drawing.Point(80, 220);
+            this.videoBitrate.Location = new System.Drawing.Point(80, 246);
             this.videoBitrate.Name = "videoBitrate";
             this.videoBitrate.Size = new System.Drawing.Size(144, 20);
             this.videoBitrate.TabIndex = 14;
             // 
             // videoFramerate
             // 
-            this.videoFramerate.Location = new System.Drawing.Point(80, 249);
+            this.videoFramerate.Location = new System.Drawing.Point(80, 275);
             this.videoFramerate.Name = "videoFramerate";
             this.videoFramerate.Size = new System.Drawing.Size(144, 20);
             this.videoFramerate.TabIndex = 15;
@@ -250,7 +251,7 @@
             "5",
             "6",
             "7"});
-            this.videoScaleQuality.Location = new System.Drawing.Point(80, 275);
+            this.videoScaleQuality.Location = new System.Drawing.Point(80, 301);
             this.videoScaleQuality.Name = "videoScaleQuality";
             this.videoScaleQuality.Size = new System.Drawing.Size(144, 21);
             this.videoScaleQuality.TabIndex = 17;
@@ -258,7 +259,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 156);
+            this.label8.Location = new System.Drawing.Point(13, 182);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(34, 13);
             this.label8.TabIndex = 18;
@@ -267,7 +268,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(336, 155);
+            this.label9.Location = new System.Drawing.Point(336, 181);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(34, 13);
             this.label9.TabIndex = 19;
@@ -278,7 +279,7 @@
             this.includeVideo.AutoSize = true;
             this.includeVideo.Checked = true;
             this.includeVideo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.includeVideo.Location = new System.Drawing.Point(80, 156);
+            this.includeVideo.Location = new System.Drawing.Point(80, 182);
             this.includeVideo.Name = "includeVideo";
             this.includeVideo.Size = new System.Drawing.Size(90, 17);
             this.includeVideo.TabIndex = 20;
@@ -290,7 +291,7 @@
             this.includeAudio.AutoSize = true;
             this.includeAudio.Checked = true;
             this.includeAudio.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.includeAudio.Location = new System.Drawing.Point(402, 154);
+            this.includeAudio.Location = new System.Drawing.Point(402, 180);
             this.includeAudio.Name = "includeAudio";
             this.includeAudio.Size = new System.Drawing.Size(90, 17);
             this.includeAudio.TabIndex = 21;
@@ -300,7 +301,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(336, 192);
+            this.label10.Location = new System.Drawing.Point(336, 218);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 13);
             this.label10.TabIndex = 22;
@@ -309,7 +310,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(336, 223);
+            this.label11.Location = new System.Drawing.Point(336, 249);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(37, 13);
             this.label11.TabIndex = 23;
@@ -318,7 +319,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(336, 249);
+            this.label12.Location = new System.Drawing.Point(336, 275);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(51, 13);
             this.label12.TabIndex = 24;
@@ -339,21 +340,21 @@
             "8",
             "9",
             "10"});
-            this.audioChannels.Location = new System.Drawing.Point(402, 248);
+            this.audioChannels.Location = new System.Drawing.Point(402, 274);
             this.audioChannels.Name = "audioChannels";
             this.audioChannels.Size = new System.Drawing.Size(121, 21);
             this.audioChannels.TabIndex = 25;
             // 
             // audioSamplerate
             // 
-            this.audioSamplerate.Location = new System.Drawing.Point(402, 189);
+            this.audioSamplerate.Location = new System.Drawing.Point(402, 215);
             this.audioSamplerate.Name = "audioSamplerate";
             this.audioSamplerate.Size = new System.Drawing.Size(121, 20);
             this.audioSamplerate.TabIndex = 26;
             // 
             // audioBitrate
             // 
-            this.audioBitrate.Location = new System.Drawing.Point(402, 220);
+            this.audioBitrate.Location = new System.Drawing.Point(402, 246);
             this.audioBitrate.Name = "audioBitrate";
             this.audioBitrate.Size = new System.Drawing.Size(121, 20);
             this.audioBitrate.TabIndex = 27;
@@ -361,7 +362,7 @@
             // presets
             // 
             this.presets.FormattingEnabled = true;
-            this.presets.Location = new System.Drawing.Point(239, 125);
+            this.presets.Location = new System.Drawing.Point(239, 151);
             this.presets.Margin = new System.Windows.Forms.Padding(2);
             this.presets.Name = "presets";
             this.presets.Size = new System.Drawing.Size(103, 21);
@@ -379,7 +380,7 @@
             "5",
             "6",
             "7"});
-            this.audioScaleQuality.Location = new System.Drawing.Point(402, 277);
+            this.audioScaleQuality.Location = new System.Drawing.Point(402, 303);
             this.audioScaleQuality.Name = "audioScaleQuality";
             this.audioScaleQuality.Size = new System.Drawing.Size(121, 21);
             this.audioScaleQuality.TabIndex = 30;
@@ -387,7 +388,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(336, 280);
+            this.label13.Location = new System.Drawing.Point(336, 306);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(67, 13);
             this.label13.TabIndex = 29;
@@ -396,12 +397,13 @@
             // checkBoxBatchMode
             // 
             this.checkBoxBatchMode.AutoSize = true;
-            this.checkBoxBatchMode.Location = new System.Drawing.Point(16, 99);
+            this.checkBoxBatchMode.Location = new System.Drawing.Point(16, 109);
             this.checkBoxBatchMode.Name = "checkBoxBatchMode";
             this.checkBoxBatchMode.Size = new System.Drawing.Size(126, 17);
             this.checkBoxBatchMode.TabIndex = 31;
             this.checkBoxBatchMode.Text = "Batch mode (Folders)";
             this.checkBoxBatchMode.UseVisualStyleBackColor = true;
+            this.checkBoxBatchMode.CheckedChanged += new System.EventHandler(this.OnChangeBatchMode);
             // 
             // encodingOptionsBindingSource
             // 
@@ -411,11 +413,21 @@
             // 
             this.encodingOptionsBindingSource1.DataSource = typeof(FFMPEG_CSWrapper.EncodingOptions);
             // 
+            // conversionFormats
+            // 
+            this.conversionFormats.FormattingEnabled = true;
+            this.conversionFormats.Location = new System.Drawing.Point(174, 109);
+            this.conversionFormats.Name = "conversionFormats";
+            this.conversionFormats.Size = new System.Drawing.Size(121, 21);
+            this.conversionFormats.TabIndex = 32;
+            this.conversionFormats.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 437);
+            this.Controls.Add(this.conversionFormats);
             this.Controls.Add(this.checkBoxBatchMode);
             this.Controls.Add(this.audioScaleQuality);
             this.Controls.Add(this.label13);
@@ -505,6 +517,7 @@
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.CheckBox checkBoxBatchMode;
+        private System.Windows.Forms.ComboBox conversionFormats;
 	}
 }
 

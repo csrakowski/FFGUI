@@ -127,6 +127,10 @@
       <Project>{aa83973a-6ad4-4963-94ef-75b9f1efcdda}</Project>
       <Name>FFMPEG-CSWrapper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{b128ac9f-d1b3-4538-98da-6d2bff01979b}</Project>
+      <Name>Logger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

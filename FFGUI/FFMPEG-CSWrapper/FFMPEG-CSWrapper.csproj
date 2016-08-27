@@ -45,6 +45,7 @@
     <Compile Include="EncodingOptions.cs" />
     <Compile Include="EncodingOptions.Presets.cs" />
     <Compile Include="FFWrapper.cs" />
+    <Compile Include="IFFWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,20 +11,34 @@ using System.Diagnostics;
 
 namespace FFMPEG_CSWrapper
 {
-	public static class FFWrapper
-	{
-		public static bool GenerateThumbnail(string inputFile, string outputFile, string timeIndex = "00:00:01.000")
+	public class FFWrapper : IFFWrapper
+    {
+		private readonly ISimpleLogger simpleLogger;
+		private readonly string ffmpeg;
+
+		public delegate void ProgressReport(int currentFileIndex, string currentFileName, int totalFiles, float percentage);
+		public event ProgressReport OnProgressChanged;
+
+		public delegate void Completed();
+		public event Completed OnCompleted;
+
+		public FFWrapper(ISimpleLogger simpleLogger, string ffmepgPath)
 		{
-			SimpleLogger.LogMessage(String.Format("Generating Thumbnail for file: \"{0}\" --> \"{1}\", using time index: {2}", inputFile, outputFile, timeIndex));
+			this.simpleLogger = simpleLogger;
+			this.ffmpeg = ffmepgPath;
+		}
 
-			var commandArguments = String.Format("-i \"{0}\" -ss {2} -f image2 -vframes 1 \"{1}\"", inputFile, outputFile, timeIndex);
+		public bool GenerateThumbnail(string inputFile, string outputFile, string timeIndex = "00:00:01.000")
+		{
+			simpleLogger.LogMessage($"Generating Thumbnail for file: \"{inputFile}\" --> \"{outputFile}\", using time index: {timeIndex}");
 
-			SimpleLogger.LogMessage("Using arguments: " + commandArguments);
+			var commandArguments = $"-i \"{inputFile}\" -ss {timeIndex} -f image2 -vframes 1 \"{outputFile}\"";
+
+			simpleLogger.LogMessage("Using arguments: " + commandArguments);
 
 			var success = false;
 			try
 			{
-				var ffmpeg = ConfigurationManager.AppSettings["FFMPEG_PATH"];
 				var procStartInfo = new ProcessStartInfo(ffmpeg, commandArguments)
 				{
 					CreateNoWindow = true,
@@ -39,25 +53,24 @@ namespace FFMPEG_CSWrapper
 			}
 			catch (Exception ex)
 			{
-				SimpleLogger.LogMessage("Exception in FFWrapper.GenerateThumbnail: " + ex.Message, "Exceptions");
+				simpleLogger.LogMessage("Exception in FFWrapper.GenerateThumbnail: " + ex.Message, "Exceptions");
 				success = false;
 			}
-			
+
 			return success;
 		}
 
-		public static Task<bool> StartConversion(string inputFile, string outputFile, EncodingOptions advancedOptions)
+		public Task<bool> StartConversionAsync(string inputFile, string outputFile, EncodingOptions advancedOptions)
 		{
 			var tcs = new TaskCompletionSource<bool>();
 
 			try
 			{
-				SimpleLogger.LogMessage(String.Format("Starting Conversion: \"{0}\" --> \"{1}\"", inputFile, outputFile));
+				simpleLogger.LogMessage($"Starting Conversion: \"{inputFile}\" --> \"{outputFile}\"");
 
-				var commandLineArguments = String.Format("-i \"{0}\" {2} \"{1}\"", inputFile, outputFile, advancedOptions.ToString());
-				SimpleLogger.LogMessage("Using arguments: " + commandLineArguments);
+				var commandLineArguments = $"-i \"{inputFile}\" {advancedOptions.ToString()} \"{outputFile}\"";
+				simpleLogger.LogMessage("Using arguments: " + commandLineArguments);
 
-				var ffmpeg = ConfigurationManager.AppSettings["FFMPEG_PATH"];
 				var procStartInfo = new ProcessStartInfo(ffmpeg, commandLineArguments)
 				{
 					//*
@@ -80,17 +93,17 @@ namespace FFMPEG_CSWrapper
 				//*
 				p.Exited += (o, args) =>
 				{
-					SimpleLogger.LogMessage("Conversion done");
+					simpleLogger.LogMessage("Conversion done");
 					p.Dispose();
 					tcs.TrySetResult(true);
 				};
 				p.OutputDataReceived += (o, args) =>
 				{
-					SimpleLogger.LogMessage(args.Data);
+					simpleLogger.LogMessage(args.Data);
 				};
 				p.ErrorDataReceived += (o, args) =>
 				{
-					SimpleLogger.LogMessage(args.Data, "Errors");
+					simpleLogger.LogMessage(args.Data, "Errors");
 				};
 				//*/
 				if(p.Start())
@@ -107,13 +120,13 @@ namespace FFMPEG_CSWrapper
 			}
 			catch (Exception ex)
 			{
-				SimpleLogger.LogMessage("Exception in FFWrapper.StartConversion: " + ex.Message, "Exceptions");
+				simpleLogger.LogMessage("Exception in FFWrapper.StartConversion: " + ex.Message, "Exceptions");
 				tcs.TrySetException(ex);
 				return tcs.Task;
 			}
 		}
 
-		public static async Task<bool> StartBatchConversion(string inputFolder, string outputFolder, string outputFormat, EncodingOptions advancedOptions)
+		public async Task<bool> StartBatchConversionAsync(string inputFolder, string outputFolder, string outputFormat, EncodingOptions advancedOptions)
 		{
 			if(!Directory.Exists(outputFolder)) {
 				Directory.CreateDirectory(outputFolder);
@@ -122,22 +135,42 @@ namespace FFMPEG_CSWrapper
 			var result = new List<bool>();
 			var di = new DirectoryInfo(inputFolder);
 			var files = di.GetFiles();
-			foreach(var file in files)
+
+			var numberOfFiles = files.Length;
+			for (int i = 0; i < numberOfFiles; i++)
 			{
 				var status = false;
 				try
 				{
+					var file = files[i];
 					var inName = file.FullName;
-					var outName = String.Format("{0}\\{1}.{2}", outputFolder, file.Name, outputFormat);
-					status = await StartConversion(inName, outName, advancedOptions);
+					var outName = $"{outputFolder}\\{file.Name}.{outputFormat}";
+					setProgress(i, inName, numberOfFiles);
+					status = await StartConversionAsync(inName, outName, advancedOptions);
 				}
 				catch (Exception ex)
 				{
-					SimpleLogger.LogMessage("Exception in FFWrapper.StartBatchConversion: " + ex.Message);
+					simpleLogger.LogMessage("Exception in FFWrapper.StartBatchConversion: " + ex.Message);
 				}
 				result.Add(status);
 			}
+			setProgress(numberOfFiles, String.Empty, numberOfFiles);
 			return result.All(b => b);
+		}
+
+		private void setProgress(int currentIndex, string currentFileName, int totalNumberOfFiles)
+		{
+			if(totalNumberOfFiles == 0 || currentIndex > totalNumberOfFiles)
+			{
+				OnProgressChanged?.Invoke(totalNumberOfFiles, String.Empty, totalNumberOfFiles, 100);
+				OnCompleted?.Invoke();
+			}
+			else
+			{
+				var perc = (((float)currentIndex / (float)totalNumberOfFiles) * 100);
+				var perv = (float)Math.Round(perc, 0);
+				OnProgressChanged?.Invoke(currentIndex, currentFileName, totalNumberOfFiles, perc);
+			}
 		}
 	}
 }

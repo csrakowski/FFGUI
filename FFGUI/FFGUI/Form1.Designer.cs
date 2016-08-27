@@ -82,7 +82,7 @@
             this.startConversionButton.TabIndex = 0;
             this.startConversionButton.Text = "Start Conversion";
             this.startConversionButton.UseVisualStyleBackColor = true;
-            this.startConversionButton.Click += new System.EventHandler(this.OnStartConversion);
+            this.startConversionButton.Click += new System.EventHandler(this.OnStartConversionAsync);
             // 
             // statusStrip1
             // 

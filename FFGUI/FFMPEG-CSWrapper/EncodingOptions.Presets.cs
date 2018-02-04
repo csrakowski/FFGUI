@@ -23,7 +23,8 @@ namespace FFMPEG_CSWrapper
             AudioSampleRate = "44100",
             AudioBitrate = "192k",
             AudioChannels = "2",
-            AudioScaleQuality = "4"
+            AudioScaleQuality = "4",
+            ApplyAudioNormalizationFilter = true
             //ForcedAudioCodec = "MP3"
         };
 
@@ -42,7 +43,8 @@ namespace FFMPEG_CSWrapper
             AudioSampleRate = "48000",
             AudioBitrate = "192k",
             AudioChannels = "2",
-            AudioScaleQuality = "4"
+            AudioScaleQuality = "4",
+            ApplyAudioNormalizationFilter = true
             //ForcedAudioCodec = "AC3"
         };
 
@@ -61,7 +63,8 @@ namespace FFMPEG_CSWrapper
             AudioSampleRate = "48000",
             AudioBitrate = "192k",
             AudioChannels = "2",
-            AudioScaleQuality = "4"
+            AudioScaleQuality = "4",
+            ApplyAudioNormalizationFilter = true
             //ForcedAudioCodec = "AC3"
         };
 
@@ -80,10 +83,11 @@ namespace FFMPEG_CSWrapper
             AudioSampleRate = "48000",
             AudioBitrate = "320k",
             AudioChannels = "2",
-            AudioScaleQuality = "4"
+            AudioScaleQuality = "4",
+            ApplyAudioNormalizationFilter = true
             //ForcedAudioCodec = "AC3"
         };
 
-        public static readonly EncodingOptions[] Presets = new[] { Custom480, Custom720, Custom1080 };
+        public static readonly EncodingOptions[] Presets = { Custom480, Custom720, Custom1080 };
     }
 }

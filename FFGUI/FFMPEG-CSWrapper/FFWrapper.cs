@@ -12,7 +12,7 @@ using System.Diagnostics;
 namespace FFMPEG_CSWrapper
 {
 	public class FFWrapper : IFFWrapper
-    {
+	{
 		private readonly ISimpleLogger simpleLogger;
 		private readonly string ffmpeg;
 

@@ -225,6 +225,7 @@ namespace FFGUI
 				AudioBitrate = audioBitrate.Text,
 				AudioChannels = audioChannels.Text,
 				AudioScaleQuality = audioScaleQuality.Text,
+				ApplyAudioNormalizationFilter = applyAudioNormalizationFilter.Checked,
 			};
 
 			return options;
@@ -243,6 +244,7 @@ namespace FFGUI
 			audioBitrate.Text = options.AudioBitrate;
 			audioChannels.Text = options.AudioChannels;
 			audioScaleQuality.Text = options.AudioScaleQuality;
+			applyAudioNormalizationFilter.Checked = options.ApplyAudioNormalizationFilter;
 		}
 
 		private void OnSelectPreset(object sender, EventArgs e)

@@ -24,7 +24,7 @@ namespace FFMPEG_CSWrapper
             AudioBitrate = "192k",
             AudioChannels = "2",
             AudioScaleQuality = "4",
-            ApplyAudioNormalizationFilter = true
+            ApplyAudioNormalizationFilter = false
             //ForcedAudioCodec = "MP3"
         };
 
@@ -44,7 +44,7 @@ namespace FFMPEG_CSWrapper
             AudioBitrate = "192k",
             AudioChannels = "2",
             AudioScaleQuality = "4",
-            ApplyAudioNormalizationFilter = true
+            ApplyAudioNormalizationFilter = false
             //ForcedAudioCodec = "AC3"
         };
 
@@ -64,7 +64,7 @@ namespace FFMPEG_CSWrapper
             AudioBitrate = "192k",
             AudioChannels = "2",
             AudioScaleQuality = "4",
-            ApplyAudioNormalizationFilter = true
+            ApplyAudioNormalizationFilter = false
             //ForcedAudioCodec = "AC3"
         };
 
@@ -84,7 +84,7 @@ namespace FFMPEG_CSWrapper
             AudioBitrate = "320k",
             AudioChannels = "2",
             AudioScaleQuality = "4",
-            ApplyAudioNormalizationFilter = true
+            ApplyAudioNormalizationFilter = false
             //ForcedAudioCodec = "AC3"
         };
 

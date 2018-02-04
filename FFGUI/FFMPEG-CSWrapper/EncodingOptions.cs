@@ -212,7 +212,7 @@ namespace FFMPEG_CSWrapper
 				}
 				else
 				{
-					return "-af \"loudnorm\"";
+					return "-af \"loudnorm\" -af \"volume=1.6\"";
 				}
 			}
 		}

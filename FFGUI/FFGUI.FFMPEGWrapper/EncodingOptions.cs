@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FFMPEG_CSWrapper
+namespace FFGUI.FFMPEGWrapper
 {
 	public sealed partial class EncodingOptions
 	{

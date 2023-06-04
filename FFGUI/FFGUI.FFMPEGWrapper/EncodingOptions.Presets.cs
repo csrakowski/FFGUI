@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FFMPEG_CSWrapper
+namespace FFGUI.FFMPEGWrapper
 {
     public sealed partial class EncodingOptions
     {

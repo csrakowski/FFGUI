@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net70;netstandard2.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>FFGUI.FFMPEGWrapper</PackageId>
+    <Title>FFGUI.FFMPEGWrapper</Title>
+    <Description>A simple FFMPEG Wrapper library</Description>
+    <PackageProjectUrl>https://github.com/csrakowski/FFGUI</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/csrakowski/FFGUI</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>FFMPEG Wrapper</PackageTags>
+    <PackageReleaseNotes>* Rebuild to modern .NET
+    </PackageReleaseNotes>
+    <RootNamespace>FFGUI.FFMPEGWrapper</RootNamespace>
+    <AssemblyName>FFGUI.FFMPEGWrapper</AssemblyName>
+    <Copyright>Christiaan Rakowski - 2013-2023</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\FFGUI.FFMPEGWrapper.xml</DocumentationFile>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="\" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>

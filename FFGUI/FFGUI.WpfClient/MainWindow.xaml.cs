@@ -72,14 +72,6 @@ namespace FFGUI.WpfClient
                 DefaultExt = "MP4"
             };
 
-            conversionFormats.Items.Add("MP4");
-            conversionFormats.Items.Add("MP3");
-            conversionFormats.Items.Add("MPEG");
-            conversionFormats.Items.Add("AVI");
-            conversionFormats.Items.Add("FLV");
-
-            conversionFormats.SelectedIndex = 0;
-
             foreach (var preset in EncodingOptions.Presets)
             {
                 presets.Items.Add(preset.PresetName);

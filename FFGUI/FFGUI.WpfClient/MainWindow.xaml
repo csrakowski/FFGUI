@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FFGUI.WpfClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="465" Width="800" ResizeMode="NoResize">
+        Title="MainWindow" Height="465" Width="700" ResizeMode="NoResize">
     <Grid>
-        <Grid HorizontalAlignment="Left" Margin="0,0,0,0" Width="800">
+        <Grid HorizontalAlignment="Left" Margin="0,0,0,0" Width="700">
             <Label Content="Input file" HorizontalAlignment="Left" Margin="38,19,0,0" VerticalAlignment="Top"/>
             <TextBox Name="inputFileName" HorizontalAlignment="Left" Margin="141,27,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="384" />
             <Button Name="browseInputButton" Content="Browse" HorizontalAlignment="Left" Margin="560,21,0,0" VerticalAlignment="Top" Click="OnBrowseInputFile" Width="60" />
@@ -29,7 +29,7 @@
             <ComboBox Name="presets" HorizontalAlignment="Left" Margin="302,103,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="OnSelectPreset"/>
         </Grid>
 
-        <Grid HorizontalAlignment="Left" Margin="0,140,0,0" Width="800">
+        <Grid HorizontalAlignment="Left" Margin="0,140,0,0" Width="700">
             <Grid HorizontalAlignment="Left" Margin="39,0,0,0" Width="260" >
                 <Label Content="Video" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
                 <CheckBox Name="includeVideo" Content="Include Video" HorizontalAlignment="Left" Margin="81,5,0,0" VerticalAlignment="Top" IsChecked="True" />
@@ -93,10 +93,10 @@
                 <CheckBox Name="applyAudioNormalizationFilter" Content="Apply 'loudnorm' filter" HorizontalAlignment="Left" Margin="81,170,0,0" VerticalAlignment="Top" IsChecked="True" />
             </Grid>
         </Grid>
-        
-        <Button Name="startConversionButton" Content="Start Conversion" HorizontalAlignment="Left" Margin="609,359,0,0" VerticalAlignment="Top" Click="OnStartConversionAsync" Grid.Column="1" Height="20" Width="91" />
-        
-        <StatusBar HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="35" Width="800">
+
+        <Button Name="startConversionButton" Content="Start Conversion" HorizontalAlignment="Left" Margin="534,359,0,0" VerticalAlignment="Top" Click="OnStartConversionAsync" Height="20" Width="91" />
+
+        <StatusBar HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="35" Width="800" Background="{x:Null}">
             <Label Name="toolStripStatusLabel1" Content="Ready" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
             <ProgressBar Name="toolStripProgressBar1" HorizontalAlignment="Left" Height="10" VerticalAlignment="Center" Margin="20,0,0,0" Width="575"/>
         </StatusBar>

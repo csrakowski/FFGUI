@@ -7,6 +7,90 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid>
+            <Label Content="Input file" HorizontalAlignment="Left" Margin="38,39,0,0" VerticalAlignment="Top"/>
+            <TextBox Name="inputFileName" HorizontalAlignment="Left" Margin="141,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="384" />
+            <Button Name="browseInputButton" Content="Browse" HorizontalAlignment="Left" Margin="560,41,0,0" VerticalAlignment="Top" Click="OnBrowseInputFile" Width="60" />
 
+            <Label Content="Output file" HorizontalAlignment="Left" Margin="38,70,0,0" VerticalAlignment="Top"/>
+            <TextBox Name="outputFileName" HorizontalAlignment="Left" Margin="141,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="384" />
+            <Button Name="browseOutputButton" Content="Browse" HorizontalAlignment="Left" Margin="560,73,0,0" VerticalAlignment="Top" Click="OnBrowseOutputFile" Width="60" />
+
+            <CheckBox Name="checkBoxBatchMode" Content="Batch mode (Folders)" HorizontalAlignment="Left" Margin="38,101,0,0" VerticalAlignment="Top" Click="OnChangeBatchMode" />
+            <ComboBox Name="conversionFormats" HorizontalAlignment="Left" Margin="210,101,0,0" VerticalAlignment="Top" Width="120" Visibility="Hidden" />
+
+            <Label Content="Advanced options (leave blank for defaults)" HorizontalAlignment="Left" Margin="38,136,0,0" VerticalAlignment="Top"/>
+            <ComboBox Name="presets" HorizontalAlignment="Left" Margin="302,138,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="OnSelectPreset"/>
+        </Grid>
+
+        <Grid HorizontalAlignment="Left" Margin="0,180,0,0">
+            <Grid HorizontalAlignment="Left" Margin="39,0,0,0" Width="260" >
+                <Label Content="Video" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                <CheckBox Name="includeVideo" Content="Include Video" HorizontalAlignment="Left" Margin="81,5,0,0" VerticalAlignment="Top" IsChecked="True" />
+
+                <Label Content="Resolution" HorizontalAlignment="Left" Margin="0,39,0,0" VerticalAlignment="Top"/>
+                <TextBox Name="videoResolution" HorizontalAlignment="Left" Margin="81,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" />
+
+                <Label Content="Bitrate" HorizontalAlignment="Left" Margin="0,70,0,0" VerticalAlignment="Top"/>
+                <TextBox Name="videoBitrate" HorizontalAlignment="Left" Margin="81,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" />
+
+                <Label Content="Framerate" HorizontalAlignment="Left" Margin="0,101,0,0" VerticalAlignment="Top"/>
+                <TextBox Name="videoFramerate" HorizontalAlignment="Left" Margin="81,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" />
+
+                <Label Content="Scale Quality" HorizontalAlignment="Left" Margin="0,132,0,0" VerticalAlignment="Top"/>
+                <ComboBox Name="videoScaleQuality" HorizontalAlignment="Left" Margin="81,136,0,0" VerticalAlignment="Top" Width="135">
+                    <ComboBoxItem Content="1" />
+                    <ComboBoxItem Content="2" />
+                    <ComboBoxItem Content="3" />
+                    <ComboBoxItem Content="4" />
+                    <ComboBoxItem Content="5" />
+                    <ComboBoxItem Content="6" />
+                    <ComboBoxItem Content="7" />
+                </ComboBox>
+            </Grid>
+
+            <Grid HorizontalAlignment="Left" Margin="409,0,0,0" Width="260" >
+                <Label Content="Audio" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                <CheckBox Name="includeAudio" Content="Include Audio" HorizontalAlignment="Left" Margin="81,5,0,0" VerticalAlignment="Top" IsChecked="True" />
+
+                <Label Content="Samplerate" HorizontalAlignment="Left" Margin="0,39,0,0" VerticalAlignment="Top"/>
+                <TextBox Name="audioSamplerate" HorizontalAlignment="Left" Margin="81,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" />
+
+                <Label Content="Bitrate" HorizontalAlignment="Left" Margin="0,70,0,0" VerticalAlignment="Top"/>
+                <TextBox Name="audioBitrate" HorizontalAlignment="Left" Margin="81,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="135" />
+
+                <Label Content="Channels" HorizontalAlignment="Left" Margin="0,101,0,0" VerticalAlignment="Top"/>
+                <ComboBox Name="audioChannels" HorizontalAlignment="Left" Margin="81,105,0,0" VerticalAlignment="Top" Width="135" >
+                    <ComboBoxItem Content="1" />
+                    <ComboBoxItem Content="2" />
+                    <ComboBoxItem Content="3" />
+                    <ComboBoxItem Content="4" />
+                    <ComboBoxItem Content="5" />
+                    <ComboBoxItem Content="6" />
+                    <ComboBoxItem Content="7" />
+                    <ComboBoxItem Content="8" />
+                    <ComboBoxItem Content="9" />
+                    <ComboBoxItem Content="10" />
+                </ComboBox>
+
+                <Label Content="Scale Quality" HorizontalAlignment="Left" Margin="0,132,0,0" VerticalAlignment="Top"/>
+                <ComboBox Name="audioScaleQuality" HorizontalAlignment="Left" Margin="81,136,0,0" VerticalAlignment="Top" Width="135">
+                    <ComboBoxItem Content="1" />
+                    <ComboBoxItem Content="2" />
+                    <ComboBoxItem Content="3" />
+                    <ComboBoxItem Content="4" />
+                    <ComboBoxItem Content="5" />
+                    <ComboBoxItem Content="6" />
+                    <ComboBoxItem Content="7" />
+                </ComboBox>
+
+                <CheckBox Name="applyAudioNormalizationFilter" Content="Apply 'loudnorm' filter" HorizontalAlignment="Left" Margin="81,170,0,0" VerticalAlignment="Top" IsChecked="True" />
+            </Grid>
+        </Grid>
+        <StatusBar HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,404,0,0" Height="30" Width="800">
+            <Label Name="toolStripStatusLabel1" Content="Ready" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+            <ProgressBar Name="toolStripProgressBar1" HorizontalAlignment="Left" Height="10" VerticalAlignment="Center" Margin="20,0,0,0" Width="575"/>
+        </StatusBar>
+        <Button Name="startConversionButton" Content="Start Conversion" HorizontalAlignment="Left" Margin="669,379,0,0" VerticalAlignment="Top" Click="OnStartConversionAsync" />
     </Grid>
 </Window>

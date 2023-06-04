@@ -9,11 +9,11 @@
     <Grid>
         <Grid HorizontalAlignment="Left" Margin="0,0,0,0" Width="700">
             <Label Content="Input file" HorizontalAlignment="Left" Margin="38,19,0,0" VerticalAlignment="Top"/>
-            <TextBox Name="inputFileName" HorizontalAlignment="Left" Margin="141,27,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="384" />
+            <TextBox Name="inputFileName" HorizontalAlignment="Left" Margin="141,27,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="384" MaxLines="1" />
             <Button Name="browseInputButton" Content="Browse" HorizontalAlignment="Left" Margin="560,21,0,0" VerticalAlignment="Top" Click="OnBrowseInputFile" Width="60" />
 
             <Label Content="Output file" HorizontalAlignment="Left" Margin="38,50,0,0" VerticalAlignment="Top"/>
-            <TextBox Name="outputFileName" HorizontalAlignment="Left" Margin="141,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="384" />
+            <TextBox Name="outputFileName" HorizontalAlignment="Left" Margin="141,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="384" MaxLines="1" />
             <Button Name="browseOutputButton" Content="Browse" HorizontalAlignment="Left" Margin="560,53,0,0" VerticalAlignment="Top" Click="OnBrowseOutputFile" Width="60" />
 
             <CheckBox Name="checkBoxBatchMode" Content="Batch mode (Folders)" HorizontalAlignment="Left" Margin="40,81,0,0" VerticalAlignment="Top" Click="OnChangeBatchMode" />
@@ -96,9 +96,9 @@
 
         <Button Name="startConversionButton" Content="Start Conversion" HorizontalAlignment="Left" Margin="534,359,0,0" VerticalAlignment="Top" Click="OnStartConversionAsync" Height="20" Width="91" />
 
-        <StatusBar HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="35" Width="800" Background="{x:Null}">
-            <Label Name="toolStripStatusLabel1" Content="Ready" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
-            <ProgressBar Name="toolStripProgressBar1" HorizontalAlignment="Left" Height="10" VerticalAlignment="Center" Margin="20,0,0,0" Width="575"/>
+        <StatusBar HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="35" Width="700" Background="{x:Null}">
+            <Label Name="toolStripStatusLabel1" Content="Ready" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Padding="0"/>
+            <ProgressBar Name="toolStripProgressBar1" HorizontalAlignment="Left" Height="10" VerticalAlignment="Bottom" Margin="0,0,0,0" Width="575" Visibility="Hidden" IsIndeterminate="True" />
         </StatusBar>
     </Grid>
 </Window>

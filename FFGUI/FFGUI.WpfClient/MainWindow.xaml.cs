@@ -42,27 +42,29 @@ namespace FFGUI.WpfClient
 
         private bool initialize()
         {
-            var ffmpeg = ConfigurationManager.AppSettings["FFMPEG_PATH"];
+            var ffmpeg = UserSettings.Default.FFMPEG_PATH;
             if (!File.Exists(ffmpeg))
             {
-                MessageBox.Show(this, MyResources.Form1_Form1_This_application_uses_FFMPEG_for_it_s_conversion__Please_select_where_ffmpeg_exe_can_be_found, MyResources.Form1_Form1_Missing_FFMPEG, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, MyResources.MainWindow_FileDialog_Pick_FFMPEG_EXE, MyResources.Title_Missing_FFMPEG, MessageBoxButton.OK, MessageBoxImage.Error);
                 var dialog = new OpenFileDialog();
                 var result = dialog.ShowDialog(Owner);
                 if (result == true)
                 {
                     ffmpeg = dialog.FileName;
-                    ConfigurationManager.AppSettings["FFMPEG_PATH"] = ffmpeg;
-                    MessageBox.Show(this, $"To make this change permanent please write the following text in the .config file at the \"FFMPEG_PATH\" key:\n{ffmpeg}");
+                    UserSettings.Default.FFMPEG_PATH = ffmpeg;
+                    UserSettings.Default.Save();
+                    MessageBox.Show(this, $"Saved path:\n{ffmpeg}");
                 }
                 else
                 {
-                    MessageBox.Show(this, MyResources.Form1_Form1_Without_FFMPEG_this_application_is_useless__closing_down, MyResources.Form1_Form1_Missing_FFMPEG, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(this, MyResources.MainWindow_Error_No_FFMPEG, MyResources.Title_Missing_FFMPEG, MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
             }
             ffwraper = new FFWrapper(ffmpeg);
             ffwraper.OnProgressChanged += Ffwraper_OnProgressChanged;
             ffwraper.OnCompleted += Ffwraper_OnCompleted;
+            ffwraper.OnLogMessage += Ffwraper_OnLogMessage;
 
             openFileDialog1 = new OpenFileDialog();
 
@@ -72,12 +74,14 @@ namespace FFGUI.WpfClient
                 DefaultExt = "MP4"
             };
 
+            folderBrowserDialog1 = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
+
             foreach (var preset in EncodingOptions.Presets)
             {
                 presets.Items.Add(preset.PresetName);
             }
             presets.SelectedIndex = 1;
-            //SetEncodingOptions(EncodingOptions.Custom720);
+
             return true;
         }
 
@@ -86,14 +90,14 @@ namespace FFGUI.WpfClient
             var inputFile = inputFileName.Text;
             if (string.IsNullOrEmpty(inputFile))
             {
-                MessageBox.Show(this, MyResources.Form1_onStartConversion_No_input_file_selected, MyResources.Form1_onStartConversion_Invalid_input_file, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, MyResources.MainWindow_onStartConversion_No_input_file_selected, MyResources.MainWindow_onStartConversion_Invalid_input_file, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             var outputFile = outputFileName.Text;
             if (string.IsNullOrEmpty(outputFile))
             {
-                MessageBox.Show(this, MyResources.Form1_onStartConversion_No_output_file_selected, MyResources.Form1_onStartConversion_Invalid_output_file, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, MyResources.MainWindow_onStartConversion_No_output_file_selected, MyResources.MainWindow_onStartConversion_Invalid_output_file, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             var advancedOptions = GetEncodingOptions();
@@ -101,43 +105,55 @@ namespace FFGUI.WpfClient
             {
                 return;
             }
+
             try
             {
-                setToolStripText("Convertion stating...");
+                setToolStripText("Conversion starting...");
                 toolStripProgressBar1.Visibility = Visibility.Visible;
 
                 bool success = false;
-                if (checkBoxBatchMode.IsChecked == true)
+                if (IsInBatchMode())
                 {
+                    toolStripProgressBar1.IsIndeterminate = false;
                     string outputFormat = conversionFormats.SelectedItem.ToString();
                     success = await ffwraper.StartBatchConversionAsync(inputFile, outputFile, outputFormat, advancedOptions);
                 }
                 else
                 {
+                    toolStripProgressBar1.IsIndeterminate = true;
                     success = await ffwraper.StartConversionAsync(inputFile, outputFile, advancedOptions);
                 }
-                var messageBoxMessage = $"The conversion completed successfully. The result is saved at: \"{outputFile}\".";
-                var toolStripMessage = "Ready";
-                if (!success)
-                {
-                    toolStripMessage = "Conversion Failed";
-                    if (checkBoxBatchMode.IsChecked == true)
-                    {
-                        messageBoxMessage = "Not all files could be converted succesfully. Please review the log and try again.";
-                    }
-                    else
-                    {
-                        messageBoxMessage = "Something went wrong during conversion. Please try again.";
-                    }
-                }
-                setToolStripText(toolStripMessage);
+
                 toolStripProgressBar1.Visibility = Visibility.Hidden;
-                MessageBox.Show(this, messageBoxMessage, "Conversion Complete", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                setResultMessages(success, outputFile);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(this, ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void setResultMessages(bool success, string outputFile)
+        {
+            var messageBoxMessage = $"The conversion completed successfully. The result is saved at: \"{outputFile}\".";
+            var toolStripMessage = "Ready";
+            if (!success)
+            {
+                toolStripMessage = "Conversion Failed";
+                if (IsInBatchMode())
+                {
+                    messageBoxMessage = "Not all files could be converted succesfully. Please review the log and try again.";
+                }
+                else
+                {
+                    messageBoxMessage = "Something went wrong during conversion. Please try again.";
+                }
+            }
+
+            setToolStripText(toolStripMessage);
+
+            MessageBox.Show(this, messageBoxMessage, "Conversion Complete", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void setToolStripText(string text)
@@ -150,14 +166,28 @@ namespace FFGUI.WpfClient
             setToolStripText("Conversion completed");
         }
 
+        private void Ffwraper_OnLogMessage(string message, string category)
+        {
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine(message, category);
+#else
+            System.Diagnostics.Trace.WriteLine(message, category);
+#endif
+        }
+
         private void Ffwraper_OnProgressChanged(int currentFileIndex, string currentFileName, int totalFiles, float percentage)
         {
             setToolStripText($"Converting \"{currentFileName}\" - file {currentFileIndex} of {totalFiles} ({percentage}%)");
+
+            if (IsInBatchMode())
+            {
+                toolStripProgressBar1.Value = percentage;
+            }
         }
 
         private void OnBrowseInputFile(object sender, RoutedEventArgs e)
         {
-            if (checkBoxBatchMode.IsChecked == true)
+            if (IsInBatchMode())
             {
                 folderBrowserDialog1.SelectedPath = inputFileName.Text;
                 var result = folderBrowserDialog1.ShowDialog(this);
@@ -184,7 +214,7 @@ namespace FFGUI.WpfClient
 
         private void OnBrowseOutputFile(object sender, RoutedEventArgs e)
         {
-            if (checkBoxBatchMode.IsChecked == true)
+            if (IsInBatchMode())
             {
                 folderBrowserDialog1.SelectedPath = outputFileName.Text;
                 var result = folderBrowserDialog1.ShowDialog(this);
@@ -264,21 +294,27 @@ namespace FFGUI.WpfClient
 
         private void OnChangeBatchMode(object sender, RoutedEventArgs e)
         {
-            conversionFormats.Visibility = (checkBoxBatchMode.IsChecked == true)
+            conversionFormats.Visibility = IsInBatchMode()
                                                 ? Visibility.Visible
                                                 : Visibility.Hidden;
+        }
+
+        private bool IsInBatchMode()
+        {
+            return checkBoxBatchMode.IsChecked == true;
         }
     }
 
     internal static class MyResources
     {
         public const string FileFormats = "MP4|*.mp4|MP3|*.mp3|AVI|*.avi|MPEG|*.mpg|Flash|*.flv|All Files|*.*";
-        public const string Form1_Form1_Missing_FFMPEG = "Missing FFMPEG";
-        public const string Form1_Form1_This_application_uses_FFMPEG_for_it_s_conversion__Please_select_where_ffmpeg_exe_can_be_found = "This application uses FFMPEG for it's conversion. Please select where ffmpeg.exe can be found";
-        public const string Form1_Form1_Without_FFMPEG_this_application_is_useless__closing_down = "Without FFMPEG this application is useless, closing down";
-        public const string Form1_onStartConversion_Invalid_input_file = "Invalid input file";
-        public const string Form1_onStartConversion_Invalid_output_file = "Invalid output file";
-        public const string Form1_onStartConversion_No_input_file_selected = "No input file selected";
-        public const string Form1_onStartConversion_No_output_file_selected = "No output file selected";
+        public const string Title_Missing_FFMPEG = "Missing FFMPEG";
+        public const string MainWindow_FileDialog_Pick_FFMPEG_EXE = "This application uses FFMPEG for it's conversion. Please select where ffmpeg.exe can be found";
+        public const string MainWindow_Error_No_FFMPEG = "Without FFMPEG this application is useless, closing down";
+
+        public const string MainWindow_onStartConversion_Invalid_input_file = "Invalid input file";
+        public const string MainWindow_onStartConversion_Invalid_output_file = "Invalid output file";
+        public const string MainWindow_onStartConversion_No_input_file_selected = "No input file selected";
+        public const string MainWindow_onStartConversion_No_output_file_selected = "No output file selected";
     }
 }

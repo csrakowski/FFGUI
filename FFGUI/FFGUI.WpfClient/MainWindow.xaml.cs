@@ -24,28 +24,21 @@ namespace FFGUI.WpfClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IFFWrapper ffwraper;
+        private readonly IFFWrapper _ffwraper;
 
-        protected OpenFileDialog openFileDialog1;
-        protected SaveFileDialog saveFileDialog1;
-        protected Ookii.Dialogs.Wpf.VistaFolderBrowserDialog folderBrowserDialog1;
+        protected readonly OpenFileDialog openFileDialog1;
+        protected readonly SaveFileDialog saveFileDialog1;
+        protected readonly Ookii.Dialogs.Wpf.VistaFolderBrowserDialog folderBrowserDialog1;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            if (!initialize())
-            {
-                App.Current.Shutdown();
-            }
-        }
-
-        private bool initialize()
-        {
             var ffmpeg = UserSettings.Default.FFMPEG_PATH;
             if (!File.Exists(ffmpeg))
             {
                 MessageBox.Show(this, MyResources.MainWindow_FileDialog_Pick_FFMPEG_EXE, MyResources.Title_Missing_FFMPEG, MessageBoxButton.OK, MessageBoxImage.Error);
+
                 var dialog = new OpenFileDialog();
                 var result = dialog.ShowDialog(Owner);
                 if (result == true)
@@ -58,13 +51,14 @@ namespace FFGUI.WpfClient
                 else
                 {
                     MessageBox.Show(this, MyResources.MainWindow_Error_No_FFMPEG, MyResources.Title_Missing_FFMPEG, MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
+                    App.Current.Shutdown();
                 }
             }
-            ffwraper = new FFWrapper(ffmpeg);
-            ffwraper.OnProgressChanged += Ffwraper_OnProgressChanged;
-            ffwraper.OnCompleted += Ffwraper_OnCompleted;
-            ffwraper.OnLogMessage += Ffwraper_OnLogMessage;
+
+            _ffwraper = new FFWrapper(ffmpeg);
+            _ffwraper.OnProgressChanged += Ffwraper_OnProgressChanged;
+            _ffwraper.OnCompleted += Ffwraper_OnCompleted;
+            _ffwraper.OnLogMessage += Ffwraper_OnLogMessage;
 
             openFileDialog1 = new OpenFileDialog();
 
@@ -81,8 +75,6 @@ namespace FFGUI.WpfClient
                 presets.Items.Add(preset.PresetName);
             }
             presets.SelectedIndex = 1;
-
-            return true;
         }
 
         private async void OnStartConversionAsync(object sender, RoutedEventArgs e)
@@ -114,14 +106,15 @@ namespace FFGUI.WpfClient
                 bool success = false;
                 if (IsInBatchMode())
                 {
+                    toolStripProgressBar1.Value = 1;
                     toolStripProgressBar1.IsIndeterminate = false;
                     string outputFormat = conversionFormats.SelectedItem.ToString();
-                    success = await ffwraper.StartBatchConversionAsync(inputFile, outputFile, outputFormat, advancedOptions);
+                    success = await _ffwraper.StartBatchConversionAsync(inputFile, outputFile, outputFormat, advancedOptions);
                 }
                 else
                 {
                     toolStripProgressBar1.IsIndeterminate = true;
-                    success = await ffwraper.StartConversionAsync(inputFile, outputFile, advancedOptions);
+                    success = await _ffwraper.StartConversionAsync(inputFile, outputFile, advancedOptions);
                 }
 
                 toolStripProgressBar1.Visibility = Visibility.Hidden;
